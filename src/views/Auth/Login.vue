@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
 import axios from "axios";
 
 
@@ -11,15 +11,14 @@ export default {
     const email = ref('')
     const password = ref('')
     const router = useRouter()
-
+    const errors = ref({})
     const onLogin = async () => {
       try{
-        const response = await axios.post('http://backend.test/api/login', {
+        const response = await axios.post('/Backend/public/api/login', {
             email: email.value,
             password: password.value
         },{
           headers: { 'Content-Type':'application/json' },
-
         })
         const data = response.data
         console.log(data.user)
@@ -29,7 +28,7 @@ export default {
           //localStorage.setItem('role',JSON.stringify(data.user.role))
           localStorage.setItem('data', JSON.stringify(data))
           await router.push('/users/index')
-          console.log(data.user.role.length)
+          //console.log(data.user.role.length)
         }else if(data.token && ((data.user.role[0].name === "Client")||(data.user.role[0].name === "GP"))){
          console.log(data.user.role.length)
           localStorage.setItem('token', data.token)
@@ -39,7 +38,12 @@ export default {
           //await router.push('/home')
          await checkUserProfile(data.token)
         }else {
-          alert('Authentification échouée')
+         Swal.fire({
+           title:'failed',
+           text:'Authentification échouée',
+           icon: 'failed',
+           confirmButtonText:'Réessayez'
+         })
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -53,7 +57,7 @@ export default {
     }
     const profile = ref([])
     const checkUserProfile = async (tok) =>{
-      const r = await axios.get('/profiles',{
+      const r = await axios.get('/Backend/public/api/profiles',{
         headers:{
           'Accept':'application/json',
           'Authorization':`Bearer ${tok}`
@@ -73,7 +77,8 @@ export default {
       email,
       password,
       onLogin,
-      logo
+      logo,
+      errors
     }
   }
 }
@@ -91,7 +96,7 @@ export default {
           <form @submit.prevent="onLogin">
             <label>Email</label>
             <input type="text" v-model="email" name="email" class="form_login" placeholder="Email..">
-
+            <p class="text-center" v-if="errors.email">{{errors.email[0]}}</p>
             <label>Password</label>
             <input type="password" v-model="password"	name="password" class="form_login" placeholder="Password ..">
 

@@ -1,19 +1,11 @@
 <script setup>
-
+import logo from '@/assets/images/logo.png'
 </script>
 
 <template>
-<!--  <footer class="text-body-secondary py-5">
-    <div class="container">
-      <p class="float-end mb-1">
-        <a href="#">Back to top</a>
-      </p>
-      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
-  </footer>-->
-  <footer class="py-5">
-    <div class="row">
+
+  <footer class="">
+<!--    <div class="row">
       <div class="col-6 col-md-2 mb-3">
         <h5>Section</h5>
         <ul class="nav flex-column">
@@ -58,19 +50,16 @@
           </div>
         </form>
       </div>
-    </div>
-
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <p>&copy; 2024 Company, Inc. All rights reserved.</p>
-      <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-      </ul>
-    </div>
+    </div>-->
+    <section class="d-flex justify-content-between align-items border-top bg-success py-0 text-light">
+      <router-link class="text-light text-decoration-none" to="/">
+        <img :src="logo" alt="Logo" width="60" height="60">
+        MonGP
+      </router-link>
+      <p class="pt-4 px-3">&copy; 2024 Company, Inc. All rights reserved. Prod By <span class="text-muted">@root</span></p>
+    </section>
   </footer>
 </template>
-
 <style scoped>
 
 </style>

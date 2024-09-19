@@ -2,7 +2,8 @@
 import {useRoute, useRouter} from "vue-router";
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
 
 const route = useRoute()
 const name = ref('')
@@ -39,7 +40,6 @@ onMounted(async () => {
   })
   permissions.value = await r.data
   //console.log(permissions.value)
-
 })
 
 const onSubmit = async () => {
@@ -55,22 +55,38 @@ const onSubmit = async () => {
       },
 
     })
-    console.log(name,permission)
-
+    //console.log(name,permission)
     data.value = await response.data
-    console.log(data.value)
+    //console.log(data.value)
     if (response.data.status === 400) {
       errors.value = response.data.errors;
-      alert(response.data.message);
+      //alert(response.data.message);
+      Swal.fire({
+        title: 'success',
+        text: response.data.message,
+        icon: 'success',
+        confirmButton:'Ok'
+      })
     } else {
       await router.push('/roles/index');
-      alert(response.data.message);
+      Swal.fire({
+        title: 'success',
+        text: response.data.message,
+        icon: 'success',
+        confirmButton:'Ok'
+      })
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
       errors.value = error.response.data;
       //console.error("Validation errors:", errors.value.message);
-      alert(errors.value.message)
+      //alert(errors.value.message)
+      Swal.fire({
+        title: 'success',
+        text: errors.value.message,
+        icon: 'success',
+        confirmButton:'Ok'
+      })
     } else {
       console.error("Error: La requête a échoué", error.response);
     }
@@ -82,8 +98,8 @@ const onSubmit = async () => {
 </script>
 
 <template>
-<div class="container rounded-5 border border-success shadow mt-5">
-  <div class="p-5 w-100">
+<div class="container border border-success mt-2 rounded-4 shadow ">
+  <div class="p-3 w-100">
     <p class="tulisan_login">Modifier un role</p>
     <img :src="logo" alt="Logo">
     <form @submit.prevent="onSubmit" >

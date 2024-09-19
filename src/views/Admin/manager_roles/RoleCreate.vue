@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from "@/axios.js";
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
 const name = ref('');
 const permissions = ref([]);
 const allPermissions = ref([]);
@@ -12,7 +13,7 @@ const token = localStorage.getItem('token');
 
 const fetchPermissions = async () => {
   try {
-    const response = await axios.get('http://backend.test/api/permissions', {
+    const response = await axios.get('/permissions', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -39,6 +40,13 @@ const submitForm = async () => {
     console.log(role)
     // Rediriger vers la page des rôles si la création est réussie
     if (role.status === 201) {
+      Swal.fire({
+        title:'success',
+        text:response.data.message,
+        icon:'success',
+        confirmButton: 'OK'
+
+      })
       await router.push('/roles/index');
     }
 
@@ -56,8 +64,8 @@ fetchPermissions();
 </script>
 
 <template>
-  <div class="container border border-success mt-5 rounded-5 shadow p-5">
-    <p class="tulisan_login">Modifier un role</p>
+  <div class="container border border-success mt-2 rounded-4 shadow p-3">
+    <p class="tulisan_login">Créer un role</p>
     <img :src="logo" alt="Logo">
     <form @submit.prevent="submitForm" >
       <div class="form-group mb-3">

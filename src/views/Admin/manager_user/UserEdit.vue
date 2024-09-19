@@ -2,7 +2,8 @@
 import {useRoute, useRouter} from "vue-router";
   import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
   export default {
     name: "UserEdit",
     setup(){
@@ -20,14 +21,6 @@ import logo from '@/assets/logo.png';
       const data = ref([])
       const token = localStorage.getItem('token')
 
-      /*const onProfile = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          photo_profile.value = file;
-          console.log('Selected file:', photo_profile.value.name);
-        }
-      }
-      console.log('Type of photo_profile:', typeof photo_profile.value);*/
       onMounted(async () => {
         const r = await axios.get(`/users/${route.params.id}`,{
           headers: {
@@ -43,8 +36,7 @@ import logo from '@/assets/logo.png';
         password_confirmation.value = ''
         photo_profile.value = user.value.user.photo_profile
         selectRoles.value = user.value.user.roles
-        //selectPermissions.value = user.value.user.permissions
-        //console.log(name.value,email.value,password.value,password_confirmation.value,photo_profile.value)
+
       })
       // Collection des roles
       onMounted(async () => {
@@ -90,7 +82,14 @@ import logo from '@/assets/logo.png';
           console.log(data.value)
           if (response.data.status === 400) {
             errors.value = response.data.errors;
-            alert(response.data.message);
+            //alert(response.data.message);
+            Swal.fire({
+              title:'error',
+              text:response.data.message,
+              icon:'error',
+              confirmButton: 'OK'
+
+            })
           } else {
             await router.push('/users/index');
             alert(response.data.message);
@@ -127,8 +126,8 @@ import logo from '@/assets/logo.png';
 </script>
 
 <template>
-  <div class="container mt-5  shadow rounded-5 border border-success">
-    <div class="p-5 w-100">
+  <div class="container my-3 shadow rounded-4 border border-success">
+    <div class="p-2 w-100">
     <p class="tulisan_login">Modifier un Utilisateur</p>
 
     <img :src="logo" alt="Logo">

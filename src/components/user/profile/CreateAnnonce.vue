@@ -2,7 +2,8 @@
 import {ref} from "vue";
 import axios from "@/axios.js";
 import {useRouter} from "vue-router";
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
 const kilos_disponibles = ref('')
 const date_depart = ref('')
 const date_arrivee = ref('')
@@ -34,10 +35,22 @@ const onSubmit = async () => {
     annonce.value = await response.data
     if (response.data.status === 400) {
       errors.value = response.data.errors;
-      alert(response.data.message);
+      //alert(response.data.message);
+      await Swal.fire({
+        title:'error',
+        text:response.data.message,
+        icon: 'error',
+        confirmButton: 'Ok'
+      })
     } else {
       await router.push('/annonces/index');
-      alert(response.data.message);
+      //alert(response.data.message);
+      await Swal.fire({
+        title:'success',
+        text:response.data.message,
+        icon: 'success',
+        confirmButton: 'Ok'
+      })
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -52,8 +65,8 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="container m-5 rounded-5 shadow border border-success ">
-    <div class="p-5 w-100">
+  <div class="container  rounded-4 shadow border border-success ">
+    <div class="p-3 w-100">
       <p class="tulisan_login">Publier une annonce</p>
         <img :src="logo" alt="Logo">
       <form @submit.prevent="onSubmit">

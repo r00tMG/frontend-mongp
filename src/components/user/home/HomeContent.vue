@@ -5,6 +5,8 @@ import axios from "@/axios.js";
 import '@vuepic/vue-datepicker/dist/main.css'
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
+import terre from '@/assets/images/terre.png'
+import monde from '@/assets/images/monde.svg'
 const annonces = ref([]);
 const searchDepart = ref('');
 const searchArrivee = ref('');
@@ -53,7 +55,7 @@ onMounted(async () => {
 
 <template>
   <main>
-    <div class="corde rounded-circle"></div>
+    <div class="container corde rounded-circle"></div>
     <div class="container-fluid">
       <div class="container m-5 p-5">
         <div class="w-75 m-auto m-5 p-5 text-center">
@@ -128,12 +130,12 @@ onMounted(async () => {
             </svg>
           </div>
           <div class="">
-            <h4 class="hover:underline mt-2">Liste des annonces</h4>
+            <h4 class="hover:underline mt-2">Liste des annonces disponibles</h4>
             <div class="h4 pb-2 width mb-4 border-bottom border-success"></div>
           </div>
         </div>
       </div>
-      <div class="card mb-3 w-50 m-5 m-auto border-success rounded" v-for="annonce in filteredAnnonces" :key="annonce.id">
+      <div class="bg-white mb-3 w-50 p-3 shadow m-auto border-success border rounded-5" v-for="annonce in filteredAnnonces" :key="annonce.id">
           <div class="card-header bg-white border-success">
             <div class="d-flex justify-content-between align-items">
               <div>
@@ -147,7 +149,7 @@ onMounted(async () => {
           </div>
           <div class="row">
           <div class="col-md-10">
-            <div class="card-body border">
+            <div class="card-body border-success rounded-5 shadow border">
               <div class="row p-5">
                 <div class="col-md-3">
                   <h4 class="card-title">Départ</h4>
@@ -179,8 +181,39 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-    <div v-else-if="hasSearched && filteredAnnonces.length === 0" class="text-center bg-danger p-5 w-50 m-auto text-light">
+    <div v-else-if="hasSearched && filteredAnnonces.length === 0" class="text-center bg-danger rounded-5 px-5 py-3 w-50 m-auto text-light">
       <p>Aucune annonce trouvée pour ces critères de recherche.</p>
+    </div>
+    <div class="container-fluid bg-light">
+      <div class="container w-80 m-auto">
+        <div class="row p-5 m-auto">
+          <div class="col-md-6">
+              <div class="row mt-5">
+                <p class="mt-5">
+                  <span class="step-number me-3">1</span>
+                  <span class="text-success fs-3">Connect</span>
+                </p>
+                <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              </div>
+          </div>
+            <img :src="monde" class="col-md-6 img-fluid" alt="#">
+        </div>
+        <div class="row p-5 my-2 m-auto">
+          <div class="col-md-6 bg-primary">
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6 bg-danger">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae commodi consequatur eaque recusandae, suscipit. Ab accusantium ad alias doloribus eligendi fuga fugiat harum incidunt molestiae possimus, praesentium, quisquam voluptatem!
+              </div>
+              <div class="col-md-6 bg-success">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae commodi consequatur eaque recusandae, suscipit. Ab accusantium ad alias doloribus eligendi fuga fugiat harum incidunt molestiae possimus, praesentium, quisquam voluptatem!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img :src="terre" alt="">
     </div>
   </main>
   <FooterHome />

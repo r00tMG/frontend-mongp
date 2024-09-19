@@ -2,7 +2,8 @@
 import { onMounted, ref } from 'vue'
 import axios from "@/axios.js";
 import { useRouter } from 'vue-router'
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
 export default {
   name: 'UserCreate',
   setup(){
@@ -65,9 +66,22 @@ export default {
         if (response.data.status === 400) {
           errors.value = response.data.errors;
           alert(response.data.message);
+          await Swal.fire({
+            title:'error',
+            text:response.data.message,
+            icon:'error',
+            confirmButton: 'OK'
+
+          })
         } else {
           await router.push('/users/index');
-          alert(response.data.message);
+          await Swal.fire({
+            title:'success',
+            text:response.data.message,
+            icon:'success',
+            confirmButton: 'OK'
+
+          })
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -97,8 +111,8 @@ export default {
 </script>
 
 <template>
-<div class="container mt-5  shadow rounded-5 border border-success">
-  <div class="p-5 w-100">
+<div class="container my-3 shadow rounded-4 border border-success">
+  <div class="p-2 w-100">
     <p class="tulisan_login">Créer un utilisateur</p>
     <img :src="logo" alt="Logo">
     <form @submit.prevent="onRegister" enctype="multipart/form-data">

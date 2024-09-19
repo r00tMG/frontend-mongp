@@ -1,28 +1,34 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import axios from "axios";
+import axios from "@/axios.js";
+import Swal from "sweetalert2";
 const users = ref([])
   onMounted(async () => {
-    const r = await axios.get('http://backend.test/api/users',{
+    const r = await axios.get('/users',{
       headers:{
         'Accept':'application/json',
         'Authorization':`Bearer ${localStorage.getItem('token')}`
       }
     })
      users.value = await r.data
-    //console.log(users.value)
-
+    console.log(users.value)
   })
   const onDelete = async (id) => {
     //console.log(id)
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
-      const r = await axios.delete(`http://backend.test/api/users/${id}`, {
+      const r = await axios.delete(`/users/${id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
       const data = r.data
-      alert(data.message)
+      Swal.fire({
+        title:'success',
+        text: data.message,
+        icon:'success',
+        confirmButton: 'Ok'
+
+      })
     }
   }
 

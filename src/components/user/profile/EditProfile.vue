@@ -3,7 +3,8 @@ import Navbar from '@/components/Navbar.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from "@/axios.js";
-import logo from '@/assets/logo.png';
+import logo from '@/assets/images/logo.png';
+import Swal from "sweetalert2";
 export default {
   name: 'EditProfile',
   components: { Navbar },
@@ -60,10 +61,22 @@ export default {
         //console.log(profile.value)
         if (response.data.status === 400) {
           errors.value = response.data.errors;
-          alert(response.data.message);
+          //alert(response.data.message);
+          await Swal.fire({
+            title:'error',
+            text:errors.value,
+            icon: 'error',
+            confirmButton: 'Ok'
+          })
         } else {
           await router.push('/profile');
-          alert(response.data.message);
+          /////alert(response.data.message);
+          await Swal.fire({
+            title:'success',
+            text:response.data.message,
+            icon: 'success',
+            confirmButton: 'Ok'
+          })
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -92,8 +105,8 @@ export default {
 
 <template>
 <!--  <Navbar />-->
-  <div class="container m-5 rounded-5 shadow border border-success ">
-    <div class="p-5 w-100">
+  <div class="container  rounded-4 shadow border border-success ">
+    <div class="p-3 w-100">
       <p class="tulisan_login">Modifier votre profile Utilisateur</p>
 
       <img :src="logo" alt="Logo">

@@ -4,8 +4,8 @@
 </script>
 
 <template>
-  <div class="col-md-3 mt-5">
-    <div class="profile">
+  <div class="col-md-2 sidebar ">
+    <div class="profile mt-5">
       <img src="#"  alt="Photo Profile" class="rounded-circle" width="100" height="100">
       <div  >
         <div class="name" >
@@ -17,7 +17,7 @@
 
     <div class="sidenav-url " >
       <div class="url">
-        <router-link to="/users/index" :class="{ active: $route.path === `/users/index` }">Users</router-link>
+        <router-link to="/users/index"  :class="{ active: $route.path === `/users/index` }">Users</router-link>
         <hr align="center">
       </div>
       <div class="url">

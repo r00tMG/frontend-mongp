@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar.vue'
 import ProfileContent from "@/components/user/profile/TableProfile.vue";
 import FooterHome from "@/components/user/home/FooterHome.vue";
 import router from "@/router/index.js";
+import logo from '@/assets/images/logo.png'
 
 export default {
   name: 'Profile',
@@ -45,7 +46,8 @@ export default {
     return{
       profile,
       roles,
-      handleLogout
+      handleLogout,
+      logo
     }
   }
 }
@@ -54,36 +56,38 @@ export default {
 
 <template >
   <!-- Navbar top -->
-  <div v-if="roles" v-for="role in roles">
-    <nav class="navbar bg-body-light navbar-top">
+  <div v-if="roles" v-for="role in roles" class="">
+    <nav class="navbar bg-body-light navbar-top p-2">
       <div class="container-fluid">
-        <router-link to="/" class="navbar-brand title  text-success fs-1">MonGP</router-link>
-          <ul class="d-flex">
+        <router-link to="/" class="navbar-brand title  fs-3">
+          <img :src="logo" alt="Logo" width="70" height="70">
+          MonGP</router-link>
+          <ul class="d-flex p-2">
             <li>
               <a href="#message">
                 <span class="icon-count">29</span>
-                <i class="fa fa-envelope fa-2x"></i>
+                <i class="fa fa-envelope fa-2x text-success"></i>
               </a>
             </li>
             <li>
               <a href="#notification">
                 <span class="icon-count">59</span>
-                <i class="fa fa-bell fa-2x"></i>
+                <i class="fa fa-bell fa-2x text-success"></i>
               </a>
             </li>
             <li>
               <a @click="handleLogout">
-                <i class="fa fa-sign-out-alt fa-2x"></i>
+                <i class="fa fa-sign-out-alt fa-2x text-success"></i>
               </a>
             </li>
           </ul>
       </div>
     </nav>
 
-<div class="container">
+<div class="container-fluid px-0">
   <div class="row">
-    <div class="col-md-3 mt-5" v-if="profile.profiles.length > 0" v-for="profile in profile.profiles">
-      <div class="profile">
+    <div class="col-md-2 sidebar" v-if="profile.profiles.length > 0" v-for="profile in profile.profiles">
+      <div class="profile mt-5">
         <img :src="profile.user.storage + '/' + profile.user.photo_profile" alt="Photo Profile" width="100" height="100">
         <div  v-if="role.permission" v-for="permission in role.permission">
           <div class="name" v-if="permission.name === 'profile-read'">
@@ -109,7 +113,7 @@ export default {
         </div>
       </div>
     </div>
-    <div class="col-md-9 w-80 m-auto">
+    <div class="col-md-10 bg-white border border-success p-2">
       <router-view />
     </div>
   </div>
@@ -119,7 +123,7 @@ export default {
                      <div class="card">
                        <div class="card-body">
                          <i class="fa fa-pen fa-xs edit"></i>
-                         <div class="social-media">
+                         <div class="social-media m-auto">
                                      <span class="fa-stack fa-sm">
                                          <i class="fas fa-circle fa-stack-2x"></i>
                                          <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
