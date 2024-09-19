@@ -14,7 +14,7 @@ export default {
     const errors = ref({})
     const onLogin = async () => {
       try{
-        const response = await axios.post('/Backend/public/api/login', {
+        const response = await axios.post('https://backend-mongp.mayaapps.site/api/login', {
             email: email.value,
             password: password.value
         },{
@@ -57,7 +57,7 @@ export default {
     }
     const profile = ref([])
     const checkUserProfile = async (tok) =>{
-      const r = await axios.get('/Backend/public/api/profiles',{
+      const r = await axios.get('/https://backend-mongp.mayaapps.site/api/profiles',{
         headers:{
           'Accept':'application/json',
           'Authorization':`Bearer ${tok}`
