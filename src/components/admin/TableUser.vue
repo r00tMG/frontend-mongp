@@ -56,7 +56,7 @@ const users = ref([])
           <td colspan="2"  v-text="user.name"></td>
           <td colspan="4"  v-text="user.email"></td>
           <td colspan="4" >
-            <img :src="users.storage + '/' + user.photo_profile" class="rounded-circle" width="40" height="40">
+            <img :src="users.storage + '/public/' + user.photo_profile" class="rounded-circle" width="40" height="40">
           </td>
           <td colspan="3" v-if="user.roles.length>0" v-for="role in user.roles">
             <span class="badge bg-primary p-1">{{role.name}}</span>
