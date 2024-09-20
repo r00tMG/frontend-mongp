@@ -15,7 +15,35 @@ onMounted(async ()=>{
 </script>
 
 <template>
-Salut
+  <div class="mt-5">
+    <div class="d-flex justify-content-between my-2">
+      <h4>Réservations</h4>
+    </div>
+    <div class=" table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-success">
+        <tr>
+          <th class="text-center px-2">GP</th>
+          <th class="text-center px-2">Annonce</th>
+          <th class="text-center px-2">Réservation(Kg)</th>
+          <th class="text-center px-2">Prix</th>
+          <th class="text-center px-2">Status</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr v-if="demandes" v-for="annonce in demandes">
+          <td class="text-center" v-text="annonce.client.name"></td>
+          <td class="text-center"><a>
+            <span class="badge badge-primary">{{annonce.annonce.origin}}</span><span class="badge badge-primary">{{annonce.annonce.destination}}</span>
+          </a></td>
+          <td class="text-center" v-text="annonce.kilos_demandes"></td>
+          <td class="text-center" v-text="annonce.prix_de_la_demande"></td>
+          <td class="text-center" v-text="annonce.status"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <style scoped>
