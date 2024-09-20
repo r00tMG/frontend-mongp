@@ -38,7 +38,8 @@ onMounted(async ()=>{
           </a></td>
           <td class="text-center" v-text="annonce.kilos_demandes"></td>
           <td class="text-center" v-text="annonce.prix_de_la_demande"></td>
-          <td class="text-center"><router-link :to="`/payment/${annonce.id}`" class="btn btn-sm btn-danger rounded-4">{{ annonce.status }}</router-link></td>
+          <td class="text-center" v-if="annonce.status === 'en_attente'"><router-link :to="`/payment/${annonce.id}`" class="btn btn-sm btn-danger rounded-4">{{ annonce.status }}</router-link></td>
+          <td class="text-center" v-else>{{ annonce.status }}</td>
         </tr>
         </tbody>
       </table>
