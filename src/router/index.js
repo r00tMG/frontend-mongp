@@ -19,6 +19,7 @@ import TableAnnonce from "@/components/user/profile/TableAnnonce.vue";
 import Demande from "@/components/user/home/Demande.vue";
 import FormPayment from "@/components/user/home/FormPayment.vue";
 import Success from "@/components/user/home/Success.vue";
+import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
 
 const router = createRouter({
   //import.meta.env.BASE_URL
@@ -98,6 +99,12 @@ const router = createRouter({
           path: '/payment/success',
           name: 'payment.success',
           component: Success,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/demandes/index',
+          name: 'demandes.index',
+          component: DemandeIndex,
           meta: { requiresAuth: true }
         },
         {
