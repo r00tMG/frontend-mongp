@@ -34,7 +34,6 @@ const router = createRouter({
       //redirect: "/dashboard",
       meta:{requiresAuth:true},
       children: [
-
         {
           path: '/users/:id/edit',
           name: 'users.edit',
