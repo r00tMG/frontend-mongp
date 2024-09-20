@@ -34,11 +34,11 @@ onMounted(async ()=>{
         <tr v-if="demandes" v-for="annonce in demandes">
           <td class="text-center" v-text="annonce.client.name"></td>
           <td class="text-center"><a>
-            <span class="badge badge-primary">{{annonce.annonce.origin}}</span><span class="badge badge-primary">{{annonce.annonce.destination}}</span>
+            <span class="badge bg-primary">{{annonce.annonce.origin}}</span><span class="badge bg-primary">{{annonce.annonce.destination}}</span>
           </a></td>
           <td class="text-center" v-text="annonce.kilos_demandes"></td>
           <td class="text-center" v-text="annonce.prix_de_la_demande"></td>
-          <td class="text-center" v-text="annonce.status"></td>
+          <td class="text-center"><button class="btn btn-sm btn-danger">{{ annonce.status }}</button></td>
         </tr>
         </tbody>
       </table>
