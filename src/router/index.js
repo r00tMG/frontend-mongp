@@ -102,12 +102,6 @@ const router = createRouter({
           meta: { requiresAuth: true }
         },
         {
-          path: '/demandes/index',
-          name: 'demandes.index',
-          component: DemandeIndex,
-          meta: { requiresAuth: true }
-        },
-        {
           path: '/login',
           name: 'login',
           component: Login
@@ -147,6 +141,12 @@ const router = createRouter({
           path: '/annonces/create',
           name: 'annonces.create',
           component: CreateAnnonce,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: '/demandes/index',
+          name: 'demandes.index',
+          component: DemandeIndex,
           meta: { requiresAuth: true }
         },
         {
