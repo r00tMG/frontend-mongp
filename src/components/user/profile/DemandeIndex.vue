@@ -38,7 +38,7 @@ onMounted(async ()=>{
           </a></td>
           <td class="text-center" v-text="annonce.kilos_demandes"></td>
           <td class="text-center" v-text="annonce.prix_de_la_demande"></td>
-          <td class="text-center"><button class="btn btn-sm btn-danger">{{ annonce.status }}</button></td>
+          <td class="text-center"><button class="btn btn-sm btn-danger rounded-4">{{ annonce.status }}</button></td>
         </tr>
         </tbody>
       </table>
