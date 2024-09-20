@@ -4,7 +4,7 @@ import axios from "@/axios.js";
 
 const demandes = ref([])
 onMounted(async ()=>{
-  const r = axios.get('/demnades',{
+  const r = axios.get('/demandes',{
     headers: {
       'Authorization':`Bearer ${localStorage.getItem('token')}`
     }
