@@ -4,9 +4,9 @@ import axios from "@/axios.js";
 
 const demandes = ref([])
 onMounted(async ()=>{
-  const r = axios.get('/demandes',{
+  const r = await axios.get('/demandes', {
     headers: {
-      'Authorization':`Bearer ${localStorage.getItem('token')}`
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
   demandes.value = await r.data
