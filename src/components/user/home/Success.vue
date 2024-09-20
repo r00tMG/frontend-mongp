@@ -14,7 +14,7 @@ const onUploads = async () => {
    invoice_url.value = await r.data.invoice_url
   //console.log(invoice_url.invoice_url)
   await Swal.fire({
-    title: 'Succès!',
+    title: 'success',
     text: 'Le lien de téléchargement est généré.',
     icon: 'success',
     confirmButtonText:'Ok',

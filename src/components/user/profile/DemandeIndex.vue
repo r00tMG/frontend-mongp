@@ -17,7 +17,7 @@ onMounted(async ()=>{
 <template>
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
-      <h4>Réservations</h4>
+      <h4 class="text-success">Mes Réservations</h4>
     </div>
     <div class=" table-responsive">
       <table class="table table-bordered table-striped">
