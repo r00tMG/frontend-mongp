@@ -59,7 +59,7 @@ export default {
   <div v-if="roles" v-for="role in roles" class="">
     <nav class="navbar bg-body-light navbar-top p-2">
       <div class="container-fluid">
-        <router-link to="/" class="navbar-brand title  fs-3">
+        <router-link to="/" class="navbar-brand text-success title  fs-3">
           <img :src="logo" alt="Logo" width="70" height="70">
           MonGP</router-link>
           <ul class="d-flex p-2">
