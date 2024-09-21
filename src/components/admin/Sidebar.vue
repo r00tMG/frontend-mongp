@@ -25,6 +25,10 @@
         <hr align="center">
       </div>
       <div class="url">
+        <router-link to="/orders/index" :class="{ active: $route.path === `/orders/index` }">Commandes</router-link>
+        <hr align="center">
+      </div>
+      <div class="url">
         <a href="#settings">Settings</a>
         <hr align="center">
       </div>
