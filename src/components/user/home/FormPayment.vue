@@ -46,6 +46,7 @@ export default {
       })
        demande.value = await response.data
       console.log(demande.value)
+      localStorage.setItem('maDemande',JSON.stringify(demande.value))
       initializeStripe();
     });
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
