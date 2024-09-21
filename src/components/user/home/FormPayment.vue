@@ -26,7 +26,7 @@ export default {
     const payment_intent_id = ref('')
     const total = ref('')
     const email = ref('')
-    //const demande = ref({})
+    let clientSecret = ref('')
     const route = useRoute()
     const router = useRouter()
     const initializeStripe = () => {
@@ -45,15 +45,17 @@ export default {
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
     const handleSubmit = async () => {
       processing.value = true;
+      if (JSON.parse(localStorage.getItem('maDemande')))
+      {
+        const { data } = await axios.post('/payment-intent', {
+          amount: JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande,
+          headers:{
+            'Authorization':`Bearer ${localStorage.getItem('token')}`
+          }
+        });
+       clientSecret = data.clientSecret;
+      }
 
-      const { data } = await axios.post('/payment-intent', {
-        amount: JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande,
-        headers:{
-          'Authorization':`Bearer ${localStorage.getItem('token')}`
-        }
-      });
-
-      const clientSecret = data.clientSecret;
       console.log(clientSecret)
       const result = await stripe.value.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -66,7 +68,7 @@ export default {
         processing.value = false;
       } else {
         if (result.paymentIntent.status === 'succeeded') {
-          console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
+          //console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
           if (JSON.parse(localStorage.getItem('maDemande')))
           {
             const r =  await axios.post('create/orders',{
