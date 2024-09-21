@@ -75,7 +75,7 @@ export default {
           console.log(demande.value)
           const r =  await axios.post('create/orders',{
               payment_intent_id:clientSecret,
-              total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande,
+              total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande || 1,
               demande_id:route.params.id,
             email:JSON.parse(localStorage.getItem('maDemande')).client.email
           },{
