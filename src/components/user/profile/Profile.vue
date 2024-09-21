@@ -64,10 +64,10 @@ export default {
           MonGP</router-link>
           <ul class="d-flex p-2">
             <li>
-              <a href="#message">
+              <router-link to="/messagerie/index">
                 <span class="icon-count">29</span>
                 <i class="fa fa-envelope fa-2x text-success"></i>
-              </a>
+              </router-link>
             </li>
             <li>
               <a href="#notification">

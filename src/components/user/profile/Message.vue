@@ -1,3 +1,4 @@
+<!--
 <script setup>
 
 </script>
@@ -279,4 +280,71 @@ img{ max-width:100%;}
   height: 516px;
   overflow-y: auto;
 }
-</style>
+</style>-->
+<template>
+  <div>
+    <div class="chat-window">
+      <div v-for="message in messages" :key="message.id">
+        <div :class="{'my-message': message.emetteur_id === userId}">
+          <p>{{ message.contenu }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-message">
+      <input v-model="newMessage" type="text" placeholder="Tapez votre message" @keyup.enter="sendMessage" />
+      <button @click="sendMessage">Envoyer</button>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ref, onMounted } from 'vue';
+
+export default {
+  props: {
+    recipientId: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
+    const messages = ref([]);
+    const newMessage = ref('');
+    const userId = ref(1);
+
+    const getMessages = async () => {
+      const response = await axios.get(`/api/messages/${props.recipientId}`);
+      messages.value = response.data;
+    };
+
+    const sendMessage = async () => {
+      if (!newMessage.value.trim()) return;
+
+      await axios.post('/api/messages', {
+        recepteur_id: props.recipientId,
+        contenu: newMessage.value,
+      });
+
+      newMessage.value = '';
+    };
+
+    onMounted(() => {
+      getMessages();
+
+      window.Echo.private(`chat.${props.recipientId}`)
+          .listen('MessageSent', (e) => {
+            messages.value.push(e.contenu);
+          });
+    });
+
+    return {
+      messages,
+      newMessage,
+      sendMessage,
+      userId,
+    };
+  }
+};
+</script>
