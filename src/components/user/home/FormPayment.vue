@@ -16,6 +16,7 @@
 import { ref, onMounted } from 'vue';
 import axios from '@/axios.js';
 import {useRoute, useRouter} from "vue-router";
+import Swal from "sweetalert2";
 //4242 4242 4242 4242
 export default {
   setup() {
@@ -45,8 +46,15 @@ export default {
         }
       })
        demande.value = await response.data
-      console.log(demande.value)
-      localStorage.setItem('maDemande',JSON.stringify(demande.value))
+      //console.log(demande.value)
+      if (demande.value)
+      {
+        localStorage.setItem('maDemande',JSON.stringify(demande.value))
+      }else{
+        await Swal.fire({
+          title:
+        })
+      }
       initializeStripe();
     });
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
