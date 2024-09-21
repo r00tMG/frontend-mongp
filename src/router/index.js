@@ -20,6 +20,7 @@ import Demande from "@/components/user/home/Demande.vue";
 import FormPayment from "@/components/user/home/FormPayment.vue";
 import Success from "@/components/user/home/Success.vue";
 import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
+import TableOrder from "@/components/admin/TableOrder.vue";
 
 const router = createRouter({
   //import.meta.env.BASE_URL
@@ -69,6 +70,12 @@ const router = createRouter({
           path: '/roles/index',
           name: 'roles.index',
           component: TableRole,
+          meta:{requiresAuth:true}
+        },
+        {
+          path: '/orders/index',
+          name: 'orders.index',
+          component: TableOrder,
           meta:{requiresAuth:true}
         }
       ]
