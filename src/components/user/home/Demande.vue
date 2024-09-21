@@ -14,6 +14,7 @@ const user_id = ref('')
 const kilos_demandes = ref('')
 const panier = ref('')
 const data = JSON.parse(localStorage.getItem('data'))
+
 const onDemander = async () => {
   try {
     const response = await axios.post('/demandes',{
@@ -201,7 +202,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="w-25 bg-success px-0" id="panier" >
-        <h3 class="text-light p-3 mt-4">Mon panier</h3>
+        <h3 class="text-light p-3 mt-4"></h3>
       </div>
     </div>
 
