@@ -38,7 +38,14 @@ export default {
       cardElement.value.mount('#card-element');
     };
 
-    onMounted( () => {
+    onMounted( async () => {
+      const response = await axios.get(`demandes/${route.params.id}`,{
+        headers:{
+          'Authorization':`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      demande.value = await response.data
+      console.log(demande.value)
       initializeStripe();
     });
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
@@ -66,13 +73,7 @@ export default {
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
-          const response = await axios.get(`demandes/${route.params.id}`,{
-            headers:{
-              'Authorization':`Bearer ${localStorage.getItem('token')}`
-            }
-          })
-           demande.value = await response.data
-          console.log(demande.value)
+
           const r =  await axios.post('create/orders',{
               payment_intent_id:clientSecret,
               total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande || 1,
