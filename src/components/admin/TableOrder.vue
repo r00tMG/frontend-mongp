@@ -36,7 +36,7 @@ onMounted(async ()=>{
           <td class="text-center" v-text="annonce.demande.annonce.user.name"></td>
           <td class="text-center" v-text="annonce.demande.client.name"></td>
           <td class="text-center"><a>
-            <span class="badge bg-primary mx-1">{{annonce.annonce.origin}}</span><span class="badge bg-primary">{{annonce.annonce.destination}}</span>
+            <span class="badge bg-primary mx-1">{{annonce.demande.annonce.origin}}</span><span class="badge bg-primary">{{annonce.demande.annonce.destination}}</span>
           </a></td>
           <td class="text-center" v-text="annonce.demande.kilos_demandes"></td>
           <td class="text-center" v-text="annonce.total"></td>
