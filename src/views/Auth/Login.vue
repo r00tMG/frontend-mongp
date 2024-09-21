@@ -47,6 +47,7 @@ export default {
           errors.value = error.response.data.errors;
           console.error("Validation errors:", errors.value);
         } else {
+          errors.value = error.response.data.errors;
           console.error("Error: La requête a échoué", error);
         }
       }
