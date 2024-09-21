@@ -94,7 +94,7 @@ export default {
           <form @submit.prevent="onLogin">
             <label>Email</label>
             <input type="text" v-model="email" name="email" class="form_login" placeholder="Email..">
-            <p class="text-center" v-if="errors.email">{{errors.email[0]}}</p>
+            <p class="text-danger" v-if="errors.email">{{errors.email[0]}}</p>
             <label>Password</label>
             <input type="password" v-model="password"	name="password" class="form_login" placeholder="Password ..">
 
