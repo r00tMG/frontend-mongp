@@ -67,32 +67,37 @@ export default {
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
-          const response = await axios.get(`demandes/${route.params.id}`,{
-            headers:{
-              'Authorization':`Bearer ${localStorage.getItem('token')}`
-            }
-          })
-          let demande = await response.data
-          console.log(demande)
-          const r =  await axios.post('create/orders',{
-              payment_intent_id:clientSecret,
-              total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande | 1,
-              demande_id:route.params.id,
-            email:JSON.parse(localStorage.getItem('maDemande')).client.email
-          },{
-            headers:{
-              'Authorization':`Bearer ${localStorage.getItem('token')}`
-            }
-          })
-          const order = await r.data
-          console.log(order)
-          console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
-          if (order)
+          if (JSON.parse(localStorage.getItem('maDemande')))
           {
-            localStorage.setItem('order',JSON.stringify(order))
-            localStorage.removeItem('maDemande')
-            await router.push('/payment/success')
+            const r =  await axios.post('create/orders',{
+              payment_intent_id:clientSecret,
+              total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande,
+              demande_id:route.params.id,
+              email:JSON.parse(localStorage.getItem('maDemande')).client.email
+            },{
+              headers:{
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+              }
+            })
+            const order = await r.data
+            console.log(order)
+            console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
+            if (order)
+            {
+              localStorage.setItem('order',JSON.stringify(order))
+              localStorage.removeItem('maDemande')
+              await router.push('/payment/success')
+            }
+          }else{
+            const response = await axios.get(`demandes/${route.params.id}`,{
+              headers:{
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
+              }
+            })
+            let demande = await response.data
+            console.log(demande)
           }
+
         }
         processing.value = false;
       }
