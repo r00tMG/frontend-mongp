@@ -154,7 +154,7 @@ body {
 .url a:hover, .url .active {
   background-color: #313b42;
   border-radius: 28px;
-  color: #000;
+  color: #f8f5f5;
   margin-left: 14%;
   width: 65%;
 }
