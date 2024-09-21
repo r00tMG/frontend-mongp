@@ -26,7 +26,7 @@ export default {
     const payment_intent_id = ref('')
     const total = ref('')
     const email = ref('')
-    const demande = ref({})
+    //const demande = ref({})
     const route = useRoute()
     const router = useRouter()
     const initializeStripe = () => {
@@ -44,8 +44,7 @@ export default {
           'Authorization':`Bearer ${localStorage.getItem('token')}`
         }
       })
-      demande.value = await response.data
-      console.log(demande.value)
+      let demande = await response.data
       initializeStripe();
     });
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
@@ -73,7 +72,7 @@ export default {
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           console.log(JSON.parse(localStorage.getItem('maDemande')).client.email)
-
+          console.log(demande)
           const r =  await axios.post('create/orders',{
               payment_intent_id:clientSecret,
               total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande || 1,
