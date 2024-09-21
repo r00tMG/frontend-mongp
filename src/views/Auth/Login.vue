@@ -99,7 +99,7 @@ export default {
             <input type="password" v-model="password"	name="password" class="form_login" placeholder="Password ..">
 
             <input type="submit" class="tombol_login" value="LOGIN">
-            <p>Si vous n'êtes pas inscrite veuillez<router-link to="/register"> cliquer ici</router-link></p>
+            <p>Si vous n'êtes pas inscrite veuillez <router-link to="/register">cliquer ici</router-link></p>
           </form>
 
         </div>
