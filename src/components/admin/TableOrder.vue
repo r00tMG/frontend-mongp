@@ -1,15 +1,15 @@
 <script setup>
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
-
+const orders = ref([])
 onMounted(async ()=>{
   const r = await axios.get('index/orders',{
     headers:{
       'Authorization':`Bearer ${localStorage.getItem('token')}`
     }
   })
-  const orders = await r.data.orders
-  console.log(orders)
+   orders.value = await r.data.orders
+  console.log(orders.value)
 })
 </script>
 
