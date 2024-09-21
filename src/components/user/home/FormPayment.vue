@@ -25,7 +25,8 @@ export default {
     const processing = ref(false);
     const payment_intent_id = ref('')
     const total = ref('')
-        const email = ref('')
+    const email = ref('')
+    const demande = ref({})
     const route = useRoute()
     const router = useRouter()
     const initializeStripe = () => {
@@ -70,8 +71,8 @@ export default {
               'Authorization':`Bearer ${localStorage.getItem('token')}`
             }
           })
-          const demande = await response.data
-          console.log(demande)
+           demande.value = await response.data
+          console.log(demande.value)
           const r =  await axios.post('create/orders',{
               payment_intent_id:clientSecret,
               total:JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande,
