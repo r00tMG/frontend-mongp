@@ -52,7 +52,10 @@ export default {
         localStorage.setItem('maDemande',JSON.stringify(demande.value))
       }else{
         await Swal.fire({
-          title:
+          title:'error',
+          text:'La réservation de vous tentez de valider n\'existe pas',
+          icon:'error',
+          confirmButton: 'Ok'
         })
       }
       initializeStripe();
