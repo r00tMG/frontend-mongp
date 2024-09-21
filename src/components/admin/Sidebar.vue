@@ -54,8 +54,8 @@ body {
 
 /* NavbarTop */
 .navbar-top {
-  background-color: #fff;
-  color: #333;
+  background-color: #333;
+  color: #fff;
   box-shadow: 0px 4px 8px 0px grey;
   height: 70px;
 }
