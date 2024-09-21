@@ -143,7 +143,7 @@ body {
 }
 
 .url a {
-  color: #818181;
+  color: #ebeced;
   display: block;
   font-size: 20px;
   margin: 10px 0;
@@ -152,7 +152,7 @@ body {
 }
 
 .url a:hover, .url .active {
-  background-color: #e8f5ff;
+  background-color: #313b42;
   border-radius: 28px;
   color: #000;
   margin-left: 14%;
