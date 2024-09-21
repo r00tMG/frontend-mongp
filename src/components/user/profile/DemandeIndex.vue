@@ -26,7 +26,7 @@ onMounted(async ()=>{
           <th class="text-center px-2">GP</th>
           <th class="text-center px-2">Annonce</th>
           <th class="text-center px-2">Réservation(Kg)</th>
-          <th class="text-center px-2">Prix</th>
+          <th class="text-center px-2">Prix(MAD)</th>
           <th class="text-center px-2">Status</th>
         </tr>
         </thead>
