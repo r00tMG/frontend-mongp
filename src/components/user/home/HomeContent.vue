@@ -62,7 +62,7 @@ onMounted(async () => {
   <main>
     <div class="container corde rounded-circle"></div>
     <div class="container-fluid">
-      <div class="container m-5 p-5">
+      <div class="container-fluid m-5 p-5">
         <div class="w-75 m-auto m-5 p-5 text-center">
           <h3>
             <span class="text-success">Publiez</span> vos annonces,
