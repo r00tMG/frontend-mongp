@@ -96,11 +96,12 @@ export default {
         processing.value = false;
       }
     };
-    //console.log(route.params.id)
+    console.log(route.params.id)
 
     return {
       handleSubmit,
       processing,
+      demande
     };
   },
 };
