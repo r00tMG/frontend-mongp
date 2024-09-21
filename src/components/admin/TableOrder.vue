@@ -42,8 +42,8 @@ onMounted(async ()=>{
           <td class="text-center" v-text="annonce.total"></td>
           <td class="text-center" v-if="annonce.demande.status === 'en_attente'"><span class="badge bg-danger ">{{ annonce.demande.status }}</span></td>
           <td class="text-center" v-else><span class="badge bg-success">{{ annonce.demande.status }}</span></td>
-          <td class="text-center"><span class="badge bg-danger ">{{ annonce.status }}</span></td>
-
+          <td class="text-center" v-if="annonce.demande.status === 'confirmé'"><span class="badge bg-danger ">{{ annonce.status }}</span></td>
+          <td class="text-center" v-else><span class="badge bg-danger ">pending</span></td>
         </tr>
         </tbody>
       </table>
