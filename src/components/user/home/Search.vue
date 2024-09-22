@@ -55,7 +55,7 @@ onMounted(async () => {
 <template>
   <main>
     <div class="card border-0 ">
-      <img :src="planete" class="card-img img-fluid" height="400rem" alt="...">
+      <img :src="planete" class="card-img img-fluid" height="400px" alt="...">
       <div class="card-img-overlay m-auto">
         <div class="container m-auto p-5">
           <div class="container">
@@ -233,7 +233,7 @@ onMounted(async () => {
       <p>Aucune annonce trouvée pour ces critères de recherche.</p>
     </div>
   </main>
-  <FooterHome class="mt-5" />
+  <FooterHome class="" />
 </template>
 
 
