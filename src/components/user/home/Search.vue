@@ -130,8 +130,8 @@ onMounted(async () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="bg-white mb-3 w-50 p-3 shadow m-auto border-success border rounded-5" v-for="annonce in filteredAnnonces" :key="annonce.id">
-                              <div class="card-header bg-white border-success">
+                            <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded-5" v-for="annonce in filteredAnnonces" :key="annonce.id">
+                              <div class="card-header bg-white border-0">
                                 <div class="d-flex justify-content-between align-items">
                                   <div>
                                     <img class="rounded-circle" :src="`${annonce.user.storage}/${annonce.user.photo_profile}`" width="40px" height="40px" alt="Photo Profile">
@@ -196,29 +196,6 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 <!--    <div v-if="hasSearched && filteredAnnonces.length > 0" class="album py-5 bg-body-tertiary">
       <div class="container">
@@ -285,7 +262,7 @@ onMounted(async () => {
       <p>Aucune annonce trouvée pour ces critères de recherche.</p>
     </div>-->
   </main>
-  <FooterHome class="" />
+  <FooterHome />
 </template>
 
 
