@@ -175,6 +175,9 @@ onMounted(async () => {
                           <div v-else-if="hasSearched && filteredAnnonces.length === 0" class="text-center bg-danger rounded-5 px-5 py-3 w-50 m-auto text-light">
                             <p>Aucune annonce trouvée pour ces critères de recherche.</p>
                           </div>
+                          <div v-else class="text-center bg-danger rounded-5 px-5 py-3 w-50 m-auto text-light">
+                            <p>Aucune recherche n'a été effectuée</p>
+                          </div>
 
                         </div>
                       </div>
