@@ -167,7 +167,7 @@ onMounted(async () => {
                                   <h4 class="card-title mt-5">Poids</h4>
                                   <div class="card-title"><span class="text-muted">Disponible</span></div>
                                   <div class="card-title"><strong>{{ annonce.kilos_disponibles }} Kg</strong></div>
-                                  <router-link :to="`/annonces/${annonce.id}`" class="btn btn-sm btn-success rounded-4">Réserver</router-link>
+                                  <a :href="`/annonces/${annonce.id}`" class="btn btn-sm btn-success rounded-4">Réserver</a>
                                 </div>
                               </div>
                             </div>
