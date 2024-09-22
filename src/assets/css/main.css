@@ -18,9 +18,8 @@
 .background{
 
     background: #FFFFFF;
-    box-shadow: 0px 0px 25px rgba(151, 151, 151, 0.2);
     border-radius: 30px;
-    margin-top: 400px !important;
+    /*margin-top: 120px!important;*/
 }
 .width{
     width: 50px;
