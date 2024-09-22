@@ -54,12 +54,12 @@ onMounted(async () => {
 
 <template>
   <main>
-    <div class="card border-0 ">
-      <img :src="planete" class="card-img img-fluid" height="400px" alt="...">
+    <div class="card p-0 rounded-0 border-0 bg-success">
+      <img :src="planete" class="card-img img-fluid" height="300px" alt="...">
       <div class="card-img-overlay m-auto">
         <div class="container m-auto p-5">
           <div class="container">
-            <div class="row m-auto px-4 py-5 background rounded-5 ">
+            <div class="row m-auto px-4 py-5 background bg-success shadow rounded-5 ">
               <div class="row">
                 <div class="col-md-10 row">
                   <div class="col-md-3">
