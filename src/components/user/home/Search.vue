@@ -5,7 +5,7 @@ import axios from "@/axios.js";
 import '@vuepic/vue-datepicker/dist/main.css'
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
-
+import planete from '@/assets/images/travel.svg'
 const annonces = ref([]);
 const searchDepart = ref('');
 const searchArrivee = ref('');
@@ -54,17 +54,66 @@ onMounted(async () => {
 
 <template>
   <main>
-    <div class="container corde rounded-circle"></div>
-    <div class="container-fluid px-0">
-      <div class="container m-auto p-5">
-        <div class="w-75 m-auto m-5 p-5 text-center">
-          <h3>
-            <span class="text-success">Publiez</span> vos annonces,
-            <span class="text-success">Gérez</span> les réservations, et
-            <span class="text-success">Connectez-vous</span> rapidement avec vos clients
-            grâce à <em class="text-success">MonGP</em>
-          </h3>
+    <div class="card border-0 ">
+      <img :src="planete" class="card-img img-fluid" height="400rem" alt="...">
+      <div class="card-img-overlay m-auto">
+        <div class="container m-auto p-5">
+          <div class="container">
+            <div class="row m-auto px-4 py-5 background rounded-5 ">
+              <div class="row">
+                <div class="col-md-10 row">
+                  <div class="col-md-3">
+                    <label for="floatingInputGroup1">Départ le</label>
+                    <input type="date" v-model="searchDepart" class="form-control rounded-4 border border-success p-3" id="floatingInputGroup1" placeholder="">
+                  </div>
+                  <div class="col-md-3">
+                    <label  for="floatingInputGroup1">Arrivée le</label>
+                    <input type="date" v-model="searchArrivee" class="form-control rounded-4 border border-success p-3" id="floatingInputGroup1" placeholder="">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="label">Origine</label>
+                    <Multiselect
+                        class="form-control rounded-4 border border-success p-2"
+                        v-model="searchOrigin"
+                        v-if="options"
+                        :options="options"
+                        placeholder="Choisissez un origine"
+                        searchable
+                        close-on-select
+                        :clear-on-select="true"
+                        :multiple="false"
+                        :allow-empty="true" />
+                  </div>
+                  <div class=" col-md-3">
+                    <label class="label">Destination</label>
+                    <Multiselect
+                        class="form-control rounded-4 border border-success p-2"
+                        v-model="searchDestination"
+                        v-if="options"
+                        :options="options"
+                        placeholder="Choisissez une destination"
+                        searchable
+                        close-on-select
+                        :clear-on-select="true"
+                        :multiple="false"
+                        :allow-empty="true" />
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button @click="searchAnnonces" class="btn btn-success rounded-5 mt-4 p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    Trouver un GP</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+<!--    <div class="container-fluid px-0">
+      <div class="container m-auto p-5">
         <div class="container">
           <div class="row m-auto px-4 py-5 background rounded-5 ">
             <div class="row">
@@ -117,7 +166,7 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div v-if="hasSearched && filteredAnnonces.length > 0" class="album py-5 bg-body-tertiary">
       <div class="container">
@@ -184,7 +233,7 @@ onMounted(async () => {
       <p>Aucune annonce trouvée pour ces critères de recherche.</p>
     </div>
   </main>
-  <FooterHome />
+  <FooterHome class="mt-5" />
 </template>
 
 
