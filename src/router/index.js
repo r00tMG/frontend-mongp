@@ -22,6 +22,7 @@ import Success from "@/components/user/home/Success.vue";
 import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
 import TableOrder from "@/components/admin/TableOrder.vue";
 import Message from "@/components/user/profile/Message.vue";
+import Search from "@/components/user/home/Search.vue";
 
 const router = createRouter({
   //import.meta.env.BASE_URL
@@ -90,6 +91,11 @@ const router = createRouter({
           name: 'home',
           component: HomeContent,
           meta: { requiresAuth: false }
+        },
+        {
+          path:'/search/annonces',
+          name:'search',
+          component: Search
         },
         {
           path: '/annonces/:id',
