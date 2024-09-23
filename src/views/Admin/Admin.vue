@@ -1,7 +1,5 @@
 <script >
-import Navbar from "@/components/admin/Sidebar.vue";
 import TableAdmin from "@/components/admin/TableUser.vue";
-import {onMounted} from "vue";
 import Header from "@/components/admin/Header.vue";
 import TableUser from "@/components/admin/TableUser.vue";
 import NavTabs from "@/components/admin/NavTabs.vue";
@@ -41,7 +39,7 @@ setup(){
     <!-- Navbar top -->
 
     <div class="container-fluid px-0" >
-      <Navbar
+      <Navbar />
       <div class="container-fluid px-0">
         <div class="row">
           <Sidebar />
