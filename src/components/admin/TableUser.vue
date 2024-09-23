@@ -21,8 +21,8 @@ const users = ref([])
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
-      const data = r.data
-      Swal.fire({
+      const data =await r.data
+      await Swal.fire({
         title:'success',
         text: data.message,
         icon:'success',
@@ -41,7 +41,7 @@ const users = ref([])
       <router-link to="/users" class="btn btn-sm btn-success">Create</router-link>
     </div>
     <div class="table-responsive">
-      <table class="table table-bordered  table-striped">
+      <table class="table table-bordered table-striped">
         <thead class="table-success">
         <tr>
           <th colspan="2">Name</th>
