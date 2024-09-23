@@ -99,6 +99,7 @@ export default {
     <div class=" bg-success col-md-6">
       <h1 class="tulisan_login text-center m-auto text-light mt-5">Register</h1>
     </div>
+    {{errors}}
     <div class="col-md-6">
       <div class="p-4  w-100">
         <img :src="logo" alt="Logo">
