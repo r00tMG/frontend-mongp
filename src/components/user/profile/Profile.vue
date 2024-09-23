@@ -6,10 +6,11 @@ import ProfileContent from "@/components/user/profile/TableProfile.vue";
 import FooterHome from "@/components/user/home/FooterHome.vue";
 import router from "@/router/index.js";
 import logo from '@/assets/images/logo.png'
+import Dropdown from "@/components/Dropdown.vue";
 
 export default {
   name: 'Profile',
-  components: {FooterHome, ProfileContent, Navbar },
+  components: {Dropdown, FooterHome, ProfileContent, Navbar },
   setup(){
     let token = localStorage.getItem('token')
     const data = JSON.parse(localStorage.getItem('data'))
@@ -27,6 +28,13 @@ export default {
           }
         })
         profile.value = await response.data
+        console.log(profile.value.profiles.length)
+        if (profile.value.profiles.length > 0)
+        {
+          await router.push('/profile/index')
+        }else{
+          await router.push('/create/profile')
+        }
       } catch (error) {
         console.error('Erreur lors de la récupération des profiles:', error)
       }
@@ -80,6 +88,7 @@ export default {
                 <i class="fa fa-sign-out-alt fa-2x text-success"></i>
               </a>
             </li>
+            <Dropdown />
           </ul>
       </div>
     </nav>

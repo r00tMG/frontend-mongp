@@ -177,7 +177,7 @@ onMounted(async () => {
                           </div>
                           <div v-else class="text-center bg-danger rounded-5 px-5 py-3 w-50 m-auto text-light">
                             <p>Aucune recherche n'a été effectuée</p>
-                          </div>
+                          </div> 
 
                         </div>
                       </div>
