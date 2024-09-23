@@ -20,3 +20,4 @@ window.Echo = new Echo({
     cluster: process.env.VUE_APP_PUSHER_CLUSTER,
     forceTLS: true,
 });
+console.log(process.env)
