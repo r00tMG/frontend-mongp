@@ -35,7 +35,7 @@ export default{
 </script>
 
 <template>
-  <div class="dropdown">
+  <div class="dropdown ms-2">
     <button class="btn btn-transparent dropdown-toggle" v-if="data && data.user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
       {{data.user.name}}
@@ -58,12 +58,12 @@ export default{
       <li class="text-center">
         <a class="dropdown-item" >{{data.user.email}}</a>
       </li>
-      <li class="dropdown-item text-center" >
-        <router-link to="/profile/index" v-if="data.user.role === 'GP' || data.user.role === 'Client'" class="text-body ms-0">
+      <li class="text-center" >
+        <router-link to="/profile/index"  v-if="data.user.role === 'GP' || data.user.role === 'Client'" class="dropdown-item">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
         </router-link>
-        <router-link to="/users/index" v-else-if="data.user.role === 'admin'" class="text-body ms-0">
+        <router-link to="/users/index" v-else-if="data.user.role === 'admin'" class="dropdown-item">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Admin</span>
         </router-link>

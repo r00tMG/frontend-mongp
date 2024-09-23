@@ -29,13 +29,13 @@ export default {
               <router-link to="/"  class="nav-link text-dark" :class="{ active: $route.path === `/` }">Home</router-link>
             </li>-->
           </ul>
-            <li class="mx-2" v-if="token">
+            <li v-if="token">
               <router-link to="/messagerie/index">
                 <span class="icon-count">29</span>
                 <i class="fa fa-envelope fa-2x text-success"></i>
               </router-link>
             </li>
-            <li v-if="token">
+            <li class="ms-2" v-if="token">
               <a href="#notification">
                 <span class="icon-count">59</span>
                 <i class="fa fa-bell fa-2x text-success"></i>
