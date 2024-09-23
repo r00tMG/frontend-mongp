@@ -315,14 +315,14 @@ export default {
     const userId = ref(1);
 
     const getMessages = async () => {
-      const response = await axios.get(`/api/messages/${props.recipientId}`);
+      const response = await axios.get(`/messages/${props.recipientId}`);
       messages.value = response.data;
     };
 
     const sendMessage = async () => {
       if (!newMessage.value.trim()) return;
 
-      await axios.post('/api/messages', {
+      await axios.post('/messages', {
         recepteur_id: props.recipientId,
         contenu: newMessage.value,
       });

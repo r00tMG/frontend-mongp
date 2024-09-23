@@ -18,8 +18,8 @@ console.log(import.meta.env.VITE_PUSHER_APP_CLUSTER);
 
 const echo = new Echo({
     broadcaster: 'pusher',
-    key: '1b9ddaf49da057b45b47', // Valeur test statique
-    cluster: 'eu',              // Valeur test statique
+    key: '1b9ddaf49da057b45b47',
+    cluster: 'eu',
     encrypted: true
 });
 
