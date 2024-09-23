@@ -162,8 +162,8 @@ body {
   background-color: #58a964;
   border-radius: 28px;
   color: #f8f5f5;
-  margin-left: 14%;
-  width: 65%;
+  /*margin-left: 14%;*/
+  /*width: 65%;*/
 }
 
 /* End */
