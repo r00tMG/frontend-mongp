@@ -59,9 +59,13 @@ export default{
         <a class="dropdown-item" >{{data.user.email}}</a>
       </li>
       <li class="dropdown-item text-center" >
-        <router-link to="/profile/index" v-if="data.user.role === 'GP' || data.user.role === 'Client'" href="#" class="text-body ms-0">
+        <router-link to="/profile/index" v-if="data.user.role === 'GP' || data.user.role === 'Client'" class="text-body ms-0">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
+        </router-link>
+        <router-link to="/users/index" v-else-if="data.user.role === 'admin'" class="text-body ms-0">
+          <i class="me-2 icon-md" data-feather="user"></i>
+          <span class="text-dark">Admin</span>
         </router-link>
       </li>
 
