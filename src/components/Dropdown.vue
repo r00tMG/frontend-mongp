@@ -9,7 +9,7 @@ export default {
     const storedData = localStorage.getItem('data');
     if (storedData) {
       data.value = JSON.parse(storedData);
-      console.log(data.value)
+      //console.log(data.value)
     } else {
       data.value = null;
     }
