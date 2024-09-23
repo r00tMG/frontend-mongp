@@ -58,18 +58,17 @@ export default{
       <li class="text-center">
         <a class="dropdown-item" >{{data.user.email}}</a>
       </li>
-      <li class="dropdown-item text-center" v-if="data.user.role === 'GP' || data.user.role === 'Client'">
-        <router-link to="/profile/index" href="#" class="text-body ms-0">
+      <li class="dropdown-item text-center" >
+        <router-link to="/profile/index" v-if="data.user.role === 'GP' || data.user.role === 'Client'" href="#" class="text-body ms-0">
+          <i class="me-2 icon-md" data-feather="user"></i>
+          <span class="text-dark">Profile</span>
+        </router-link>
+        <router-link to="/users/index" v-else href="#" class="text-body ms-0">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
         </router-link>
       </li>
-      <li class="dropdown-item text-center" v-else>
-        <router-link to="/users/index" href="#" class="text-body ms-0">
-          <i class="me-2 icon-md" data-feather="user"></i>
-          <span class="text-dark">Profile</span>
-        </router-link>
-      </li>
+
       <li class="dropdown-item text-center">
         <button @click="handleLogout" type="submit" class="text-body ms-0 bg-transparent border-0 p-0">
           <i class="me-2 icon-md" data-feather="log-out"></i>
