@@ -35,7 +35,55 @@ export default{
 </script>
 
 <template>
-  <label class="dropdown">
+  <div class="dropdown">
+    <button class="btn btn-transparent dropdown-toggle" v-if="data && data.user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
+      {{data.user.name}}
+    </button>
+    <button class="btn btn-transparent dropdown-toggle" v-else type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+      </svg>
+    </button>
+    <ul class="dropdown-menu" v-if="data && data.token">
+      <li>
+        <p class="dropdown-item">
+          <img class="rounded-circle text-center" :src="data.storage+'/'+data.user.photo_profile" width="50px" height="50px" alt="">
+        </p>
+      </li>
+      <li>
+        <p class="dropdown-item" >{{data.user.name}}</p>
+      </li>
+      <li>
+        <p class="dropdown-item" >{{data.user.email}}</p>
+      </li>
+      <li class="dropdown-item" v-if="data.user.role === 'GP' || data.user.role === 'Client'">
+        <router-link to="/profile/index" href="#" class="text-body ms-0">
+          <i class="me-2 icon-md" data-feather="user"></i>
+          <span class="text-dark">Profile</span>
+        </router-link>
+      </li>
+      <li class="dropdown-item" v-else>
+        <router-link to="/users/index" href="#" class="text-body ms-0">
+          <i class="me-2 icon-md" data-feather="user"></i>
+          <span class="text-dark">Profile</span>
+        </router-link>
+      </li>
+      <li class="dropdown-item">
+        <button @click="handleLogout" type="submit" class="text-body ms-0 bg-transparent border-0 p-0">
+          <i class="me-2 icon-md" data-feather="log-out"></i>
+          <span class="text-dark text-center">Déconnexion</span>
+        </button>
+      </li>
+    </ul>
+    <ul class="dropdown-menu" v-else>
+      <li class="text-center">
+        <router-link to="/login">Se Connecter</router-link>
+      </li>
+    </ul>
+  </div>
+<!--  <label class="dropdown">
     <div class="dd-button bg-transparent" v-if="data && data.user">
       <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
       {{data.user.name}}
@@ -75,7 +123,7 @@ export default{
         <router-link to="/login">Se connecter</router-link>
       </li>
     </ul>
-  </label>
+  </label>-->
 <!--  <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
 
     <ul class="list-unstyled p-1">
