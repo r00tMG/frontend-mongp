@@ -6,7 +6,6 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 
-const env = loadEnv(mode, process.cwd(), '')
 export default defineConfig({
   plugins: [
     vue(),
@@ -17,8 +16,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
     define: {
-      __VITE_PUSHER_APP_KEY__: JSON.stringify(env.VITE_PUSHER_APP_KEY),
-      __VITE_PUSHER_APP_CLUSTER__: JSON.stringify(env.VITE_PUSHER_APP_CLUSTER)
+      __VITE_PUSHER_APP_KEY__: JSON.stringify(import.meta.env.VITE_PUSHER_APP_KEY),
+      __VITE_PUSHER_APP_CLUSTER__: JSON.stringify(import.meta.env.VITE_PUSHER_APP_CLUSTER)
     }
   }
 })
