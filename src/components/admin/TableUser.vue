@@ -11,7 +11,7 @@ const users = ref([])
       }
     })
      users.value = await r.data
-    console.log(users.value)
+    //console.log(users.value)
   })
   const onDelete = async (id) => {
     //console.log(id)
