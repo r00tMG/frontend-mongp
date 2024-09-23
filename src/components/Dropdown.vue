@@ -62,6 +62,12 @@ export default {
             <span class="text-dark">Profile</span>
           </router-link>
         </li>
+        <li class="dropdown-item py-2 " v-else>
+          <router-link to="/users/index" href="#" class="text-body ms-0">
+            <i class="me-2 icon-md" data-feather="user"></i>
+            <span class="text-dark">Profile</span>
+          </router-link>
+        </li>
         <li class="dropdown-item py-2">
           <button @click="handleLogout" type="submit" class="text-body ms-0 bg-transparent border-0 p-0">
             <i class="me-2 icon-md" data-feather="log-out"></i>
