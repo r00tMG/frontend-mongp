@@ -9,6 +9,7 @@ import TableRole from "@/components/admin/TableRole.vue";
 import Sidebar from "@/components/admin/Sidebar.vue";
 import router from "@/router/index.js";
 import logo from '@/assets/images/logo.png'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: "Admin.vue",
@@ -40,7 +41,7 @@ setup(){
     <!-- Navbar top -->
 
     <div class="container-fluid px-0" >
-      <Navbar />
+      <Navbar
       <div class="container-fluid px-0">
         <div class="row">
           <Sidebar />
