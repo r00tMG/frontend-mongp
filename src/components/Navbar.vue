@@ -29,18 +29,20 @@ export default {
               <router-link to="/"  class="nav-link text-dark" :class="{ active: $route.path === `/` }">Home</router-link>
             </li>-->
           </ul>
-          <li>
-            <router-link to="/messagerie/index">
-              <span class="icon-count">29</span>
-              <i class="fa fa-envelope fa-2x text-success"></i>
-            </router-link>
-          </li>
-          <li>
-            <a href="#notification">
-              <span class="icon-count">59</span>
-              <i class="fa fa-bell fa-2x text-success"></i>
-            </a>
-          </li>
+          <ul>
+            <li>
+              <router-link to="/messagerie/index">
+                <span class="icon-count">29</span>
+                <i class="fa fa-envelope fa-2x text-success"></i>
+              </router-link>
+            </li>
+            <li>
+              <a href="#notification">
+                <span class="icon-count">59</span>
+                <i class="fa fa-bell fa-2x text-success"></i>
+              </a>
+            </li>
+          </ul>
           <Dropdown/>
         </div>
       </div>
