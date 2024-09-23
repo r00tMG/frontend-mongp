@@ -51,36 +51,8 @@ import Dropdown from "@/components/Dropdown.vue";
 <template >
   <!-- Navbar top -->
   <div v-if="roles" v-for="role in roles" class="">
-<!--    <nav class="navbar bg-body-light navbar-top p-2">
-      <div class="container-fluid">
-        <router-link to="/" class="navbar-brand text-success title  fs-3">
-          <img :src="logo" alt="Logo" width="70" height="70">
-          MonGP</router-link>
-          <ul class="d-flex p-2">
-            <li>
-              <router-link to="/messagerie/index">
-                <span class="icon-count">29</span>
-                <i class="fa fa-envelope fa-2x text-success"></i>
-              </router-link>
-            </li>
-            <li>
-              <a href="#notification">
-                <span class="icon-count">59</span>
-                <i class="fa fa-bell fa-2x text-success"></i>
-              </a>
-            </li>
-            <li>
-              <a @click="handleLogout">
-                <i class="fa fa-sign-out-alt fa-2x text-success"></i>
-              </a>
-            </li>
-            <Dropdown />
-          </ul>
-      </div>
-    </nav>-->
     <Navbar />
-
-<div class="container-fluid px-0">
+    <div class="container-fluid px-0">
   <div class="row">
     <div class="col-md-2 sidebar" v-if="profile.profiles.length > 0" v-for="profile in profile.profiles">
       <div class="profile mt-5">
@@ -119,8 +91,8 @@ import Dropdown from "@/components/Dropdown.vue";
   </div>
 </div>
 
-<!--           <h2>SOCIAL MEDIA</h2>-->
-                     <div class="card">
+<!--<h2>SOCIAL MEDIA</h2>-->
+    <div class="card">
                        <div class="card-body">
                          <i class="fa fa-pen fa-xs edit"></i>
                          <div class="social-media m-auto">
@@ -155,7 +127,7 @@ import Dropdown from "@/components/Dropdown.vue";
                          </div>
                        </div>
                      </div>
-     </div>
+  </div>
 
 
 </template>
@@ -274,7 +246,7 @@ body {
 }
 
 .url a:hover, .url .active {
-  background-color: #313b42;
+  background-color: #1ba263;
   border-radius: 28px;
   color: #f8f5f5;
   margin-left: 14%;
