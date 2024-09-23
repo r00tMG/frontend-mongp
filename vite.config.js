@@ -13,6 +13,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    },
+    define: {
+      __VITE_PUSHER_APP_KEY__: JSON.stringify(process.env.VITE_PUSHER_APP_KEY),
+      __VITE_PUSHER_APP_CLUSTER__: JSON.stringify(process.env.VITE_PUSHER_APP_CLUSTER)
     }
   }
 })
