@@ -18,7 +18,7 @@ import users from '@/assets/images/users.svg'
 
     <div class="sidenav-url " >
       <div class="url">
-        <p class="text-center">
+        <p class="text-center py-3">
           Dashboard
         </p>
         <hr>
@@ -146,13 +146,11 @@ body {
   padding-top: 10px;
 }
 
-.url, hr {
-  /*text-align: center;*/
-}
+
 
 .url hr {
-  margin-left: 20%;
-  width: 60%;
+  width: 100%;
+  text-align: center;
 }
 
 .url a {
