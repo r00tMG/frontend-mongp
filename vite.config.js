@@ -5,8 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
-const env = loadEnv(mode, process.cwd(), '')
 
+const env = loadEnv(mode, process.cwd(), '')
 export default defineConfig({
   plugins: [
     vue(),
