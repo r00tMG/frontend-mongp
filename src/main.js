@@ -12,12 +12,7 @@ app.use(router)
 app.component('VueDatePicker', VueDatePicker)
 app.mount('#app')
 
-window.Pusher = Pusher;
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: process.env.VUE_APP_PUSHER_KEY,
-    cluster: process.env.VUE_APP_PUSHER_CLUSTER,
-    forceTLS: true,
+const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    encrypted: true
 });
-console.log(process.env)
