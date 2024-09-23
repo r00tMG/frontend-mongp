@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import router from "@/router/index.js";
 
-export default 30px{
+export default{
   name: "Dropdown",
   setup(){
     const data = ref({});
@@ -58,12 +58,6 @@ export default 30px{
         </div>
         <li class="dropdown-item py-2 " v-if="data.user.role === 'GP' || data.user.role === 'Client'">
           <router-link to="/profile/index" href="#" class="text-body ms-0">
-            <i class="me-2 icon-md" data-feather="user"></i>
-            <span class="text-dark">Profile</span>
-          </router-link>
-        </li>
-        <li class="dropdown-item py-2 " v-else>
-          <router-link to="/users/index" href="#" class="text-body ms-0">
             <i class="me-2 icon-md" data-feather="user"></i>
             <span class="text-dark">Profile</span>
           </router-link>
