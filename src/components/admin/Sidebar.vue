@@ -6,7 +6,7 @@ import users from '@/assets/images/users.svg'
 
 <template>
   <div class="col-md-2 sidebar ">
-    <div class="profile mt-5">
+<!--    <div class="profile mt-5">
       <img src="#"  alt="Photo Profile" class="rounded-circle" width="100" height="100">
       <div  >
         <div class="name" >
@@ -14,9 +14,15 @@ import users from '@/assets/images/users.svg'
         <div class="job" >
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div class="sidenav-url " >
+      <div class="url">
+        <router-link to="/users/index" class="fs-5"  :class="{ active: $route.path === `/users/index` }">
+          Dashboard
+        </router-link>
+        <hr>
+      </div>
       <div class="url">
         <router-link to="/users/index" class="fs-5"  :class="{ active: $route.path === `/users/index` }">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill me-2 mb-2" viewBox="0 0 16 16">
