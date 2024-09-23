@@ -63,10 +63,6 @@ export default{
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
         </router-link>
-        <router-link to="/users/index" v-else href="#" class="text-body ms-0">
-          <i class="me-2 icon-md" data-feather="user"></i>
-          <span class="text-dark">Profile</span>
-        </router-link>
       </li>
 
       <li class="dropdown-item text-center">
