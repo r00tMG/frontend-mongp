@@ -21,7 +21,7 @@ import users from '@/assets/images/users.svg'
         <p class="text-center py-3 fs-4">
           Dashboard
         </p>
-        <hr>
+        <hr class="mb-5">
       </div>
       <div class="url">
         <router-link to="/users/index" class="fs-5"  :class="{ active: $route.path === `/users/index` }">
