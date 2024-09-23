@@ -9,8 +9,8 @@ export default{
     const storedData = localStorage.getItem('data');
     if (storedData) {
       data.value = JSON.parse(storedData);
-      console.log(data.value)
-      console.log(data.value.user.role)
+      //console.log(data.value)
+      //console.log(data.value.user.role)
     } else {
       data.value = null;
     }
@@ -22,7 +22,7 @@ export default{
         //console.log(token)
         await router.push('/login');
       } catch (error) {
-        console.log('Salut')
+        //console.log('Salut')
         console.error('Logout failed:', error);
       }
     }

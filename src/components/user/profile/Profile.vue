@@ -41,7 +41,7 @@ import Dropdown from "@/components/Dropdown.vue";
         //console.log(token)
         await router.push('/login');
       } catch (error) {
-        console.log('Salut')
+        //console.log('Salut')
         console.error('Logout failed:', error);
       }
     }
