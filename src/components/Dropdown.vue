@@ -47,30 +47,30 @@ export default{
       </svg>
     </button>
     <ul class="dropdown-menu" v-if="data && data.token">
-      <li>
+      <li  class="text-center">
         <p class="dropdown-item">
           <img class="rounded-circle text-center" :src="data.storage+'/'+data.user.photo_profile" width="50px" height="50px" alt="">
         </p>
       </li>
-      <li>
-        <p class="dropdown-item" >{{data.user.name}}</p>
+      <li class="text-center">
+        <a class="dropdown-item" >{{data.user.name}}</a>
       </li>
-      <li>
-        <p class="dropdown-item" >{{data.user.email}}</p>
+      <li class="text-center">
+        <a class="dropdown-item" >{{data.user.email}}</a>
       </li>
-      <li class="dropdown-item" v-if="data.user.role === 'GP' || data.user.role === 'Client'">
+      <li class="dropdown-item text-center" v-if="data.user.role === 'GP' || data.user.role === 'Client'">
         <router-link to="/profile/index" href="#" class="text-body ms-0">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
         </router-link>
       </li>
-      <li class="dropdown-item" v-else>
+      <li class="dropdown-item text-center" v-else>
         <router-link to="/users/index" href="#" class="text-body ms-0">
           <i class="me-2 icon-md" data-feather="user"></i>
           <span class="text-dark">Profile</span>
         </router-link>
       </li>
-      <li class="dropdown-item">
+      <li class="dropdown-item text-center">
         <button @click="handleLogout" type="submit" class="text-body ms-0 bg-transparent border-0 p-0">
           <i class="me-2 icon-md" data-feather="log-out"></i>
           <span class="text-dark text-center">Déconnexion</span>
