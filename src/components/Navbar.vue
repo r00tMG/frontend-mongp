@@ -29,7 +29,7 @@ export default {
               <router-link to="/"  class="nav-link text-dark" :class="{ active: $route.path === `/` }">Home</router-link>
             </li>-->
           </ul>
-            <li  v-if="token">
+            <li class="mx-2"  v-if="token">
               <router-link to="/messagerie/index">
                 <span class="icon-count">29</span>
                 <i class="fa fa-envelope fa-2x text-success"></i>
@@ -102,7 +102,7 @@ body {
   font-size: 11px;
   left: -25px;
   padding: 2px;
-  position: relative;
+  /*position: relative;*/
 }
 
 /* End */
