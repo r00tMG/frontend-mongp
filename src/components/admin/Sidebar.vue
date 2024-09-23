@@ -1,4 +1,5 @@
 <script setup>
+import users from '@/assets/images/users.svg'
 
 
 </script>
@@ -17,21 +18,16 @@
 
     <div class="sidenav-url " >
       <div class="url">
+        <img :src="users" width="30px" height="30px" alt="Icon user"/>
         <router-link to="/users/index"  :class="{ active: $route.path === `/users/index` }">Users</router-link>
-        <hr align="center">
       </div>
       <div class="url">
         <router-link to="/roles/index" :class="{ active: $route.path === `/roles/index` }">Roles</router-link>
-        <hr align="center">
       </div>
       <div class="url">
         <router-link to="/orders/index" :class="{ active: $route.path === `/orders/index` }">Commandes</router-link>
-        <hr align="center">
       </div>
-      <div class="url">
-        <a href="#settings">Settings</a>
-        <hr align="center">
-      </div>
+
     </div>
   </div>
 
