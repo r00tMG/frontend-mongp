@@ -14,9 +14,12 @@ app.mount('#app')
 
 console.log(import.meta.env.VITE_PUSHER_APP_KEY);
 console.log(import.meta.env.VITE_PUSHER_APP_CLUSTER);
+
+
 const echo = new Echo({
     broadcaster: 'pusher',
-    key: import.meta.env.VITE_PUSHER_APP_KEY,
-    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    key: '1b9ddaf49da057b45b47', // Valeur test statique
+    cluster: 'eu',              // Valeur test statique
     encrypted: true
 });
+
