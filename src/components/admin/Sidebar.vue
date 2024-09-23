@@ -18,7 +18,7 @@ import users from '@/assets/images/users.svg'
 
     <div class="sidenav-url " >
       <div class="url">
-        <p class="text-center py-3">
+        <p class="text-center py-3 fs-4">
           Dashboard
         </p>
         <hr>
