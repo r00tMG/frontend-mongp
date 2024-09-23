@@ -84,8 +84,8 @@ export default {
 
 <template>
   <div class="container">
-    <div class="row border rounded-1 m-5 shadow border-success">
-      <div class="col-md-6  bg-success ">
+    <div class="row border rounded-1 m-5 shadow-sm border-success">
+      <div class="col-md-6  bg-success m-auto ">
       <h1 class="text-light mt-5 text-center">Login</h1>
       </div>
       <div class="col-md-6">
