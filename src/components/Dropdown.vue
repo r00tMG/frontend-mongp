@@ -9,6 +9,7 @@ export default {
     const storedData = localStorage.getItem('data');
     if (storedData) {
       data.value = JSON.parse(storedData);
+      console.log(data.value)
     } else {
       data.value = null;
     }
@@ -55,7 +56,7 @@ export default {
           <p class="tx-16 fw-bolder">{{data.user.name}}</p>
           <p class="tx-12 text-dark">{{data.user.email}}</p>
         </div>
-        <li class="dropdown-item py-2">
+        <li class="dropdown-item py-2 " v-if="data.user.roles === 'GP' || data.user.roles === 'Client'">
           <router-link to="/profile/index" href="#" class="text-body ms-0">
             <i class="me-2 icon-md" data-feather="user"></i>
             <span class="text-dark">Profile</span>
