@@ -18,8 +18,7 @@ import users from '@/assets/images/users.svg'
 
     <div class="sidenav-url " >
       <div class="url">
-        <img :src="users" width="30px" height="30px" alt="Icon user"/>
-        <router-link to="/users/index"  :class="{ active: $route.path === `/users/index` }">Users</router-link>
+        <router-link to="/users/index"  :class="{ active: $route.path === `/users/index` }"><img :src="users" width="30px" height="30px" alt="Icon user"/>Users</router-link>
       </div>
       <div class="url">
         <router-link to="/roles/index" :class="{ active: $route.path === `/roles/index` }">Roles</router-link>
