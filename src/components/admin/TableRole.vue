@@ -32,7 +32,7 @@ const onDelete = async (id) =>{
 <template>
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
-      <h4>Liste des roles</h4>
+      <h4 class="text-success">Liste des roles</h4>
       <router-link to="/roles" class="btn btn-sm btn-success ">Create</router-link>
     </div>
     <div class="table-responsive">

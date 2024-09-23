@@ -37,7 +37,7 @@ const users = ref([])
 <template>
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
-      <h4>Liste des users</h4>
+      <h4 class="text-success">Liste des users</h4>
       <router-link to="/users" class="btn btn-sm btn-success">Create</router-link>
     </div>
     <div class="table-responsive">
