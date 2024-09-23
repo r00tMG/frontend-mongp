@@ -4,8 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  // Charge les variables d'environnement
+export default defineConfig(({ mode, process }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
