@@ -21,13 +21,13 @@ const users = ref([])
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
-      const data =await r.data
+      const data = await r.data
+      console.log(data)
       await Swal.fire({
         title:'success',
         text: data.message,
         icon:'success',
         confirmButton: 'Ok'
-
       })
     }
   }
