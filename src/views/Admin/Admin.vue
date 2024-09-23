@@ -40,33 +40,7 @@ setup(){
     <!-- Navbar top -->
 
     <div class="container-fluid px-0" >
-     <nav class="navbar bg-body-light navbar-top p-2">
-        <div class="container-fluid">
-          <router-link to="/" class="navbar-brand title text-center text-success fs-1">
-            <img :src="logo" alt="Logo" width="70" height="70">
-            Admin</router-link>
-          <ul class="d-flex p-2">
-            <li>
-              <a href="#message">
-                <span class="icon-count">29</span>
-                <i class="fa fa-envelope fa-2x text-success"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#notification">
-                <span class="icon-count">59</span>
-                <i class="fa fa-bell fa-2x text-success"></i>
-              </a>
-            </li>
-            <li>
-              <a @click="handleLogout">
-                <i class="fa fa-sign-out-alt fa-2x text-success"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
+      <Navbar />
       <div class="container-fluid px-0">
         <div class="row">
           <Sidebar />
