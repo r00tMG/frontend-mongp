@@ -41,6 +41,17 @@
     align-items: center;
     padding: 4px;
 }
+.circle-button{
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+}
 .sidebar {
     /*position: fixed;*/
     /*top: 0;*/
