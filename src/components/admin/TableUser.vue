@@ -11,10 +11,10 @@ const users = ref([])
       }
     })
      users.value = await r.data
-    //console.log(users.value)
+    console.log(users.value)
   })
   const onDelete = async (id) => {
-    //console.log(id)
+    console.log(id)
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       const r = await axios.delete(`/users/${id}`, {
         headers: {
