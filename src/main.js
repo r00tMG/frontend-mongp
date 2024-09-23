@@ -12,7 +12,11 @@ app.use(router)
 app.component('VueDatePicker', VueDatePicker)
 app.mount('#app')
 
-const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+console.log(import.meta.env.VITE_PUSHER_APP_KEY);
+console.log(import.meta.env.VITE_PUSHER_APP_CLUSTER);
+const echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
     encrypted: true
 });
