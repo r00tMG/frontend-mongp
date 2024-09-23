@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { onMounted, ref } from 'vue'
 import axios from "@/axios.js";
 import Navbar from '@/components/Navbar.vue'
@@ -7,18 +7,12 @@ import FooterHome from "@/components/user/home/FooterHome.vue";
 import router from "@/router/index.js";
 import logo from '@/assets/images/logo.png'
 import Dropdown from "@/components/Dropdown.vue";
-
-export default {
-  name: 'Profile',
-  components: {Dropdown, FooterHome, ProfileContent, Navbar },
-  setup(){
     let token = localStorage.getItem('token')
     const data = JSON.parse(localStorage.getItem('data'))
     //console.log(data.user.role)
     const roles = data.user.role
     //console.log(user.id)
     const profile = ref({ profiles: [] })
-
     onMounted(async () => {
       try {
         const response = await axios.get(`/profiles`, {
@@ -51,14 +45,6 @@ export default {
         console.error('Logout failed:', error);
       }
     }
-    return{
-      profile,
-      roles,
-      handleLogout,
-      logo
-    }
-  }
-}
 
 </script>
 
@@ -93,8 +79,6 @@ export default {
       </div>
     </nav>-->
     <Navbar />
-
-
 
 <div class="container-fluid px-0">
   <div class="row">
