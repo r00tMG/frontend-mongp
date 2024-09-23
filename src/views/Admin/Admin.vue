@@ -39,8 +39,8 @@ setup(){
 
     <!-- Navbar top -->
 
-    <div >
-<!--      <nav class="navbar bg-body-light navbar-top p-2">
+    <div class="container-fluid px-0" >
+     <nav class="navbar bg-body-light navbar-top p-2">
         <div class="container-fluid">
           <router-link to="/" class="navbar-brand title text-center text-success fs-1">
             <img :src="logo" alt="Logo" width="70" height="70">
@@ -65,8 +65,8 @@ setup(){
             </li>
           </ul>
         </div>
-      </nav>-->
-      <Navbar />
+      </nav>
+
       <div class="container-fluid px-0">
         <div class="row">
           <Sidebar />
