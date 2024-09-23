@@ -94,6 +94,8 @@ export default {
     </nav>-->
     <Navbar />
 
+
+
 <div class="container-fluid px-0">
   <div class="row">
     <div class="col-md-2 sidebar" v-if="profile.profiles.length > 0" v-for="profile in profile.profiles">

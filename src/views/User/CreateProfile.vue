@@ -78,7 +78,7 @@ export default {
 <template>
   <Navbar />
   <div class="w-75 m-auto rounded-5 border border-success shadow mt-5 p-5">
-    <p class="tulisan_login">Créer votre profile Utilisateur</p>
+    <p class="tulisan_login">Complétez votre profile Utilisateur</p>
 
     <img :src="logo" alt="coffee">
 
@@ -98,14 +98,12 @@ export default {
         </div>
         <div class="col-md-6">
           <div class="form-group mb-3">
-            <label>Hobbies</label>
-            <input type="text" v-model="hobbies" name="hobbies" class="form_login" placeholder="Hobbies..">
+            <label>Téléphone</label>
+            <input type="number" v-model="hobbies" name="hobbies" class="form_login" placeholder="Hobbies..">
             <p v-if="errors.hobbies" class="text-danger">{{ errors.hobbies[0] }}</p>
           </div>
         </div>
       </div>
-
-
       <div class="row">
         <div class="col-md-6">
           <div class="form-group mb-3">
@@ -124,11 +122,8 @@ export default {
           </div>
         </div>
       </div>
-
-
-      <input type="submit" class="tombol_login" value="Create">
+      <input type="submit" class="tombol_login" value="Continer">
     </form>
-
   </div>
 
 </template>
