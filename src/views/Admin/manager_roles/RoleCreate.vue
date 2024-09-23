@@ -96,47 +96,6 @@ fetchPermissions();
 
   </div>
 
-<!--  <div>
-
-    <div v-if="errors.length > 0" class="alert alert-danger">
-      <strong>Whoops!</strong> Something went wrong.<br><br>
-      <ul>
-        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
-      </ul>
-    </div>
-
-    <form @submit.prevent="submitForm">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="mb-3">
-            <label for="name" class="form-label"><strong>Name:</strong></label>
-            <input type="text" v-model="name" placeholder="Name" class="form-control" />
-          </div>
-
-          <div class="mb-3">
-            <label for="permission" class="form-label"><strong>Permissions:</strong></label>
-            <div class="list-group">
-              <label
-                  v-for="permission in allPermissions"
-                  :key="permission.id"
-                  class="list-group-item d-flex align-items-center">
-                <input
-                    type="checkbox"
-                    v-model="permissions"
-                    :value="permission.id"
-                    class="form-check-input me-3"
-                />
-                {{ permission.name }}
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </form>
-  </div>-->
 </template>
 
 
@@ -179,7 +138,7 @@ label {
 }
 
 .tombol_login {
-  background: green;
+  background: #3D8854;
   color: white;
   font-size: 11pt;
   width: 100%;
