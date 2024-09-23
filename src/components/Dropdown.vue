@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import router from "@/router/index.js";
 
-export default {
+export default 30px{
   name: "Dropdown",
   setup(){
     const data = ref({});
@@ -37,7 +37,7 @@ export default {
 <template>
   <label class="dropdown">
     <div class="dd-button bg-transparent" v-if="data && data.user">
-      <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="40px" height="40px" alt="Photo Profile" >
+      <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
       {{data.user.name}}
     </div>
     <div class="dd-button gap-1" v-else>
