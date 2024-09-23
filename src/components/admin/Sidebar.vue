@@ -18,9 +18,9 @@ import users from '@/assets/images/users.svg'
 
     <div class="sidenav-url " >
       <div class="url">
-        <router-link to="/users/index" class="fs-5"  :class="{ active: $route.path === `/users/index` }">
+        <p class="text-center">
           Dashboard
-        </router-link>
+        </p>
         <hr>
       </div>
       <div class="url">
