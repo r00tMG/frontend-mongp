@@ -83,51 +83,14 @@ export default {
       </div>
 
     </div>
-
-    <!--   <h2>SOCIAL MEDIA</h2>
-            <div class="card">
-              <div class="card-body">
-                <i class="fa fa-pen fa-xs edit"></i>
-                <div class="social-media">
-                            <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>Edit
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
-                            </span>
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-invision fa-stack-1x fa-inverse"></i>
-                            </span>
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
-                            </span>
-                  <span class="fa-stack fa-sm">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-snapchat fa-stack-1x fa-inverse"></i>
-                            </span>
-                </div>
-              </div>
-            </div>-->
   </div>
 
-  <div class="row">
+  <div class="row" v-if="profile.profiles" v-for="profile in profile.profiles">
     <div class="col-12 grid-margin">
       <div class="card">
         <div class="position-relative">
           <figure class="overflow-hidden mb-0 d-flex justify-content-center">
-            <img src="#"class="rounded-top" alt="profile cover">
+            <img :src="profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
           <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
             <div>
