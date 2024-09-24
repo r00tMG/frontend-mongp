@@ -21,7 +21,7 @@ export default {
           }
         })
         profile.value = await response.data
-        //console.log(profile.value)
+        console.log(profile.value)
       } catch (error) {
         console.error('Erreur lors de la récupération des profils:', error)
       }
