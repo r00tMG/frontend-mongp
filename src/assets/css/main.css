@@ -1,3 +1,7 @@
+:root{
+    --bs-border-radius: 0.25rem;
+
+}
 *{
     margin: 0;
     padding: 0;
@@ -127,3 +131,10 @@
     }
 }
 
+.height{
+    height: 250px;
+}
+.rounded-top {
+    border-top-left-radius: var(--bs-border-radius) !important;
+    border-top-right-radius: var(--bs-border-radius) !important;
+}

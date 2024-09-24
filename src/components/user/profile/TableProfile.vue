@@ -89,13 +89,13 @@ export default {
     <div class="col-12 grid-margin">
       <div class="card">
         <div class="position-relative">
-          <figure class="overflow-hidden mb-0 d-flex justify-content-center">
+          <figure class="overflow-hidden mb-0 d-flex justify-content-center height">
             <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
           <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
             <div>
-              <img class="wd-70 rounded-circle" src="#" alt="profile">
-              <span class="h4 ms-3 text-dark">Amiah Burton</span>
+              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" alt="profile">
+              <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
             </div>
             <div class="d-none d-md-block">
               <button class="btn btn-primary btn-icon-text">
