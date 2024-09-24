@@ -299,7 +299,7 @@ img{ max-width:100%;}
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '@/axios.js';
 import { ref, onMounted } from 'vue';
 
 export default {
@@ -332,7 +332,6 @@ export default {
 
     onMounted(() => {
       getMessages();
-
       window.Echo.private(`chat.${props.recipientId}`)
           .listen('MessageSent', (e) => {
             messages.value.push(e.contenu);
