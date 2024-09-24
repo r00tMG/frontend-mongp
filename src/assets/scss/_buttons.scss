@@ -1,0 +1,35 @@
+// Buttons with icon and text
+&.btn-icon-text {
+  .btn-icon-prepend {
+    margin-right: .5rem;
+  }
+  .btn-icon-append {
+    margin-left: .5rem;
+  }
+  .btn-icon-prepend,
+  .btn-icon-append {
+    width: 18px;
+    height: 18px;
+  }
+  &.btn-xs {
+    .btn-icon-prepend,
+    .btn-icon-append {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  &.btn-sm {
+    .btn-icon-prepend,
+    .btn-icon-append {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  &.btn-lg {
+    .btn-icon-prepend,
+    .btn-icon-append {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
