@@ -80,9 +80,6 @@ export default {
           </tr>
           </tbody>
         </table>
-<!--        <table v-else>
-          <thead class="text-danger text-center">Vous n'êtes pas autorisé à voir le contenu de cette section</thead>
-        </table>-->
       </div>
 
     </div>
