@@ -51,7 +51,7 @@ export default{
     <ul class="dropdown-menu" v-if="data && data.token">
       <li  class="text-center">
         <p class="dropdown-item">
-          <img class="rounded-circle text-center" :src="data.storage+'/'+data.user.photo_profile" width="50px" height="50px" alt="">
+          <img class="rounded-circle text-center border border-success" :src="data.storage+'/'+data.user.photo_profile" width="50px" height="50px" alt="">
         </p>
       </li>
       <li class="text-center">
