@@ -137,7 +137,7 @@ export default {
   <div class="row profile-body" v-if="profile.profiles" v-for="profile in profile.profiles">
     <!-- left wrapper start -->
     <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-      <div class="card rounded">
+      <div class="card rounded border border-success">
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between mb-2">
             <h6 class="card-title mb-0">About</h6>
