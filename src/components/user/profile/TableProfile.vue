@@ -90,7 +90,7 @@ export default {
       <div class="card">
         <div class="position-relative">
           <figure class="overflow-hidden mb-0 d-flex justify-content-center">
-            <img :src="profile.user.photo_profile" class="rounded-top" alt="profile cover">
+            <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
           <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
             <div>
