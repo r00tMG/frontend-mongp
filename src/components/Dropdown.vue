@@ -37,7 +37,7 @@ export default{
 
 <template>
   <div class="dropdown ms-2">
-    <button class="btn btn-transparent dropdown-toggle" v-if="data && data.user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-transparent dropdown-toggle border-success" v-if="data && data.user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img class="rounded-circle" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
       {{data.user.name}}
     </button>
