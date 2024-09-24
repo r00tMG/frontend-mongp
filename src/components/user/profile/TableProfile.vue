@@ -92,7 +92,7 @@ export default {
           <figure class="overflow-hidden mb-0 d-flex justify-content-center height">
             <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
-          <div class="d-flex justify-content-between align-items-center  w-100 px-2 px-md-4 mt-n4">
+          <div class="d-flex justify-content-between position-absolute align-items-center w-100 px-2 px-md-4 mt-n4">
             <div>
               <img class="wd-70 rounded-circle border border-success" :src="profile.user.storage + '/' + profile.user.photo_profile" width="40px" height="40px" alt="profile">
               <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
