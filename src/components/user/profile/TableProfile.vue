@@ -134,7 +134,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="row profile-body">
+  <div class="row profile-body" v-if="profile.profiles" v-for="profile in profile.profiles">
     <!-- left wrapper start -->
     <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
       <div class="card rounded">
@@ -155,11 +155,11 @@ export default {
           <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-            <p class="text-muted" v-text="profile[0].address"></p>
+            <p class="text-muted" v-text="profile.address"></p>
           </div>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-            <p class="text-muted" v-text="profile[0].user.email"></p>
+            <p class="text-muted" v-text="profile.user.email"></p>
           </div>
 
           <div class="mt-3 d-flex social-links">
