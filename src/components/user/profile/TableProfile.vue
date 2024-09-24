@@ -92,9 +92,9 @@ export default {
           <figure class="overflow-hidden mb-0 d-flex justify-content-center height">
             <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
-          <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
+          <div class="d-flex justify-content-between align-items-center  w-100 px-2 px-md-4 mt-n4">
             <div>
-              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" width="40px" height="40px" alt="profile">
+              <img class="wd-70 rounded-circle border border-success" :src="profile.user.storage + '/' + profile.user.photo_profile" width="40px" height="40px" alt="profile">
               <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
             </div>
             <div class="d-none d-md-block">
@@ -154,21 +154,14 @@ export default {
           </div>
           <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
           <div class="mt-3">
-            <label class="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
-            <p class="text-muted">November 15, 2015</p>
-          </div>
-          <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-            <p class="text-muted">New York, USA</p>
+            <p class="text-muted" v-text="profile.address"></p>
           </div>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-            <p class="text-muted">me@nobleui.com</p>
+            <p class="text-muted" v-text="profile.user.email"></p>
           </div>
-          <div class="mt-3">
-            <label class="tx-11 fw-bolder mb-0 text-uppercase">Website:</label>
-            <p class="text-muted">www.nobleui.com</p>
-          </div>
+
           <div class="mt-3 d-flex social-links">
             <a href="javascript:;" class="btn btn-icon border btn-xs me-2">
               <i data-feather="github"></i>
@@ -188,7 +181,7 @@ export default {
     <div class="col-md-8 col-xl-6 middle-wrapper">
       <div class="row">
         <div class="col-md-12 grid-margin">
-          <div class="card rounded">
+          <div class="card rounded border border-success">
             <div class="card-header">
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
@@ -233,52 +226,6 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="card rounded">
-            <div class="card-header">
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">5 min ago</p>
-                  </div>
-                </div>
-                <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-lg pb-3px" data-feather="more-horizontal"></i>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                    <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="meh" class="icon-sm me-2"></i> <span class="">Unfollow</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="corner-right-up" class="icon-sm me-2"></i> <span class="">Go to post</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="share-2" class="icon-sm me-2"></i> <span class="">Share</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="copy" class="icon-sm me-2"></i> <span class="">Copy link</span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <img class="img-fluid" src="#" alt="">
-            </div>
-            <div class="card-footer">
-              <div class="d-flex post-actions">
-                <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                  <i class="icon-md" data-feather="heart"></i>
-                  <p class="d-none d-md-block ms-2">Like</p>
-                </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                  <i class="icon-md" data-feather="message-square"></i>
-                  <p class="d-none d-md-block ms-2">Comment</p>
-                </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted">
-                  <i class="icon-md" data-feather="share"></i>
-                  <p class="d-none d-md-block ms-2">Share</p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- middle wrapper end -->
@@ -286,130 +233,22 @@ export default {
     <div class="d-none d-xl-block col-xl-3">
       <div class="row">
         <div class="col-md-12 grid-margin">
-          <div class="card rounded">
+          <div class="card rounded border border-success">
             <div class="card-body">
               <h6 class="card-title">latest photos</h6>
               <div class="row ms-0 me-0">
                 <a href="javascript:;" class="col-md-4 ps-1 pe-1">
                   <figure class="mb-2">
-                    <img class="img-fluid rounded" src="#" alt="">
+<!--                    <img class="img-fluid rounded" src="#" alt="">-->
                   </figure>
                 </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-2">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-2">
-                    <img class="img-fluid rounded" src="##" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-2">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-2">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-2">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-0">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-0">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
-                  <figure class="mb-0">
-                    <img class="img-fluid rounded" src="#" alt="">
-                  </figure>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 grid-margin">
-          <div class="card rounded">
-            <div class="card-body">
-              <h6 class="card-title">suggestions for you</h6>
-              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
-              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
-              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
-              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
-              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-center hover-pointer">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">12 Mutual Friends</p>
-                  </div>
-                </div>
-                <button class="btn btn-icon"><i data-feather="user-plus" class="text-muted"></i></button>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- right wrapper end -->
   </div>
 
 </template>
