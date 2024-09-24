@@ -28,10 +28,6 @@ const router = createRouter({
   //import.meta.env.BASE_URL
   history: createWebHistory(),
   routes: [
-    /*{
-      path: "/search",
-      component: Search
-    },*/
     {
       path: "/admin",
       component: Admin,
