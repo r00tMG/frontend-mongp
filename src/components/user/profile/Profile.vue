@@ -55,22 +55,14 @@ import Dropdown from "@/components/Dropdown.vue";
     <div class="container-fluid px-0">
   <div class="row">
     <div class="col-md-2 sidebar" v-if="profile.profiles.length > 0" v-for="profile in profile.profiles">
-      <div class="profile mt-5">
-<!--        <img :src="profile.user.storage + '/' + profile.user.photo_profile" alt="Photo Profile" width="100" height="100">
-        <div  v-if="role.permission" v-for="permission in role.permission">
-          <div class="name" v-if="permission.name === 'profile-read'">
-            {{profile.user.name}}
-          </div>
-          <div class="job" v-if="permission.name === 'profile-read'">
-            {{profile.job}}
-          </div>
-        </div>-->
-        <p class="text-center py-3 fs-4">
-          Dashboard
-        </p>
-        <hr class="mb-5">
-      </div>
+
       <div class="sidenav-url " >
+        <div class="url">
+          <p class="text-center py-3 fs-4">
+            Dashboard
+          </p>
+          <hr class="mb-5">
+        </div>
         <div class="url">
           <router-link to="/profile/index" class="fs-5" :class="{ active: $route.path === `/profile/index` }">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle mb-1 me-2" viewBox="0 0 16 16">
