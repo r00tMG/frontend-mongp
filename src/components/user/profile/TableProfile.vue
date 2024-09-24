@@ -87,25 +87,28 @@ export default {
 
   <div class="row" v-if="profile.profiles" v-for="profile in profile.profiles">
     <div class="col-12 grid-margin">
-      <div class="card">
+      <div class="card mb-4 border border-success">
         <div class="position-relative">
           <figure class="overflow-hidden mb-0 d-flex justify-content-center height">
             <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
           <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
             <div>
-              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" width="70px" height="70px" alt="profile">
+              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" width="40px" height="40px" alt="profile">
               <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
             </div>
             <div class="d-none d-md-block">
-              <button class="btn btn-primary btn-icon-text">
-                <i data-feather="edit" class="btn-icon-prepend"></i> Edit profile
+              <button class="btn btn-success rounded-5 btn-icon-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg> Edit profile
               </button>
             </div>
           </div>
         </div>
         <div class="d-flex justify-content-center p-3 rounded-bottom">
-          <ul class="d-flex align-items-center m-0 p-0">
+<!--          <ul class="d-flex align-items-center m-0 p-0">
             <li class="d-flex align-items-center active">
               <i class="me-1 icon-md text-primary" data-feather="columns"></i>
               <a class="pt-1px d-none d-md-block text-primary" href="#">Timeline</a>
@@ -126,7 +129,7 @@ export default {
               <i class="me-1 icon-md" data-feather="video"></i>
               <a class="pt-1px d-none d-md-block text-body" href="#">Videos</a>
             </li>
-          </ul>
+          </ul>-->
         </div>
       </div>
     </div>
