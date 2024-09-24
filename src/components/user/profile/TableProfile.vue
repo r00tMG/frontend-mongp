@@ -37,54 +37,6 @@ export default {
 </script>
 
 <template>
-<!--  <div class="my-5" v-if="profile.profiles" v-for="profile in profile.profiles">
-    <h2>IDENTITY</h2>
-    <div class="card shadow rounded-1" v-if="roles" v-for="role in roles">
-      <div class="card-body table-responsive" v-for="permission in role.permission" >
-        <table class="" v-if="permission.name === 'profile-read'">
-          <router-link
-              :to="`/profile/${profile.id}/edit`"
-              :class="{ active: $route.path === `/profile/${profile.id}/edit` }"
-          ><i class="fa fa-pen fa-xs edit text-dark"></i>
-          </router-link>
-          <tbody>
-          <tr>
-            <td>Name</td>
-            <td>:</td>
-            <td>{{profile.user.name}}</td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td>:</td>
-            <td> {{profile.user.email}}</td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>:</td>
-            <td>{{ profile.address }}</td>
-          </tr>
-          <tr>
-            <td>Hobbies</td>
-            <td>:</td>
-            <td>{{ profile.hobbies }}</td>
-          </tr>
-          <tr>
-            <td>Job</td>
-            <td>:</td>
-            <td>{{ profile.job }}</td>
-          </tr>
-          <tr>
-            <td>Skill</td>
-            <td>:</td>
-            <td>{{ profile.skill }}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </div>-->
-
   <div class="row" v-if="profile.profiles" v-for="profile in profile.profiles">
     <div class="col-12 grid-margin">
       <div class="card mb-4 border border-success">
@@ -111,28 +63,7 @@ export default {
           </div>
         </div>
         <div class="d-flex justify-content-center p-3 rounded-bottom">
-<!--          <ul class="d-flex align-items-center m-0 p-0">
-            <li class="d-flex align-items-center active">
-              <i class="me-1 icon-md text-primary" data-feather="columns"></i>
-              <a class="pt-1px d-none d-md-block text-primary" href="#">Timeline</a>
-            </li>
-            <li class="ms-3 ps-3 border-start d-flex align-items-center">
-              <i class="me-1 icon-md" data-feather="user"></i>
-              <a class="pt-1px d-none d-md-block text-body" href="#">About</a>
-            </li>
-            <li class="ms-3 ps-3 border-start d-flex align-items-center">
-              <i class="me-1 icon-md" data-feather="users"></i>
-              <a class="pt-1px d-none d-md-block text-body" href="#">Friends <span class="text-muted tx-12">3,765</span></a>
-            </li>
-            <li class="ms-3 ps-3 border-start d-flex align-items-center">
-              <i class="me-1 icon-md" data-feather="image"></i>
-              <a class="pt-1px d-none d-md-block text-body" href="#">Photos</a>
-            </li>
-            <li class="ms-3 ps-3 border-start d-flex align-items-center">
-              <i class="me-1 icon-md" data-feather="video"></i>
-              <a class="pt-1px d-none d-md-block text-body" href="#">Videos</a>
-            </li>
-          </ul>-->
+
         </div>
       </div>
     </div>
@@ -157,14 +88,21 @@ export default {
           </div>
           <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
           <div class="mt-3">
-            <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
+            <label class="tx-11 fw-bolder mb-0 text-uppercase">Address:</label>
             <p class="text-muted" v-text="profile.address"></p>
           </div>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
             <p class="text-muted" v-text="profile.user.email"></p>
           </div>
-
+          <div class="mt-3">
+            <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
+            <p class="text-muted" v-text="profile.user.email"></p>
+          </div>
+          <div class="mt-3">
+            <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
+            <p class="text-muted" v-text="profile.user.email"></p>
+          </div>
           <div class="mt-3 d-flex social-links">
             <a href="javascript:;" class="btn btn-icon border btn-xs me-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
@@ -244,11 +182,14 @@ export default {
         <div class="col-md-12 grid-margin">
           <div class="card rounded border border-success">
             <div class="card-body">
-              <h6 class="card-title">latest photos</h6>
+              <h6 class="card-title">Réservations</h6>
               <div class="row ms-0 me-0">
                 <a href="javascript:;" class="col-md-4 ps-1 pe-1">
                   <figure class="mb-2">
-<!--                    <img class="img-fluid rounded" src="#" alt="">-->
+                    <p class="">
+                      <span class="text-success fs-3">Connexion</span>
+                      <span class="step-number me-3">1</span>
+                    </p>
                   </figure>
                 </a>
 
