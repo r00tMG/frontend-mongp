@@ -98,8 +98,8 @@ export default {
         </div>
         <div class="col-md-6">
           <div class="form-group mb-3">
-            <label>Téléphone</label>
-            <input type="number" v-model="hobbies" name="hobbies" class="form_login" placeholder="Hobbies..">
+            <label>Hobbies</label>
+            <input type="text" v-model="hobbies" name="hobbies" class="form_login" placeholder="Hobbies..">
             <p v-if="errors.hobbies" class="text-danger">{{ errors.hobbies[0] }}</p>
           </div>
         </div>
