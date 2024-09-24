@@ -155,11 +155,11 @@ export default {
           <p>Hi! I'm Amiah the Senior UI Designer at NobleUI. We hope you enjoy the design and quality of Social.</p>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-            <p class="text-muted" v-text="profile.address"></p>
+            <p class="text-muted" v-text="profile[0].address"></p>
           </div>
           <div class="mt-3">
             <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-            <p class="text-muted" v-text=""></p>
+            <p class="text-muted" v-text="profile[0].user.email"></p>
           </div>
 
           <div class="mt-3 d-flex social-links">
