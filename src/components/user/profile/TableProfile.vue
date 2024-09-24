@@ -95,7 +95,7 @@ export default {
           <div class="d-flex justify-content-between align-items-center  w-100 px-2 px-md-4 mt-n4">
             <div>
               <img class="wd-70 rounded-circle border border-success" :src="profile.user.storage + '/' + profile.user.photo_profile" width="40px" height="40px" alt="profile">
-              <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
+              <span class="h4 ms-3 text-dark" v-text=""></span>
             </div>
             <div class="d-none d-md-block">
               <button class="btn btn-success rounded-5 btn-icon-text">
