@@ -94,7 +94,7 @@ export default {
           </figure>
           <div class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
             <div>
-              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" alt="profile">
+              <img class="wd-70 rounded-circle" :src="profile.user.storage + '/' + profile.user.photo_profile" width="70px" height="70px" alt="profile">
               <span class="h4 ms-3 text-dark" v-text="profile.user.name"></span>
             </div>
             <div class="d-none d-md-block">
