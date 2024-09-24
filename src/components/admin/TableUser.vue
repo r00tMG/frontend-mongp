@@ -70,7 +70,7 @@ const users = ref([])
           </td>
         </tr>
         <tr v-else>
-          Loading...
+          <p class="text-light text-center bg-danger p-5 rounded-5 ">Aucun utilisateur n'a été trouvé</p>
         </tr>
         </tbody>
       </table>

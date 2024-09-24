@@ -59,7 +59,7 @@ const onDelete = async (id) =>{
           </td>
         </tr>
         <tr v-else>
-          Loading...
+          <p class="text-light text-center bg-danger p-5 rounded-5 ">Aucune résarvation n'a été trouvé</p>
         </tr>
         </tbody>
       </table>

@@ -95,15 +95,27 @@ body {
   text-decoration: none;
 }
 
+div#navbarSupportedContent a{
+  position: relative;
+}
+
 .icon-count {
   background-color: #ff0000;
   color: #fff;
-  float: right;
   font-size: 11px;
-  left: -25px;
   padding: 2px;
   /*position: relative;*/
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -14px;
+  left: 17px;
 }
+
 
 /* End */
 

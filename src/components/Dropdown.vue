@@ -38,7 +38,7 @@ export default{
 <template>
   <div class="dropdown ms-2">
     <button class="btn btn-transparent dropdown-toggle border-success" v-if="data && data.user" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <img class="rounded-circle border border-success" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="Photo Profile" >
+      <img class="rounded-circle border border-success" :src="data.storage+'/'+data.user.photo_profile" width="30px" height="30px" alt="" >
       {{data.user.name}}
     </button>
 
@@ -54,26 +54,34 @@ export default{
           <img class="rounded-circle text-center border border-success" :src="data.storage+'/'+data.user.photo_profile" width="50px" height="50px" alt="">
         </p>
       </li>
-      <li class="text-center">
-        <a class="dropdown-item" >{{data.user.name}}</a>
+      <li class="">
+        <a class="dropdown-item" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope me-2" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+          </svg>
+          {{data.user.email}}</a>
       </li>
-      <li class="text-center">
-        <a class="dropdown-item" >{{data.user.email}}</a>
-      </li>
-      <li class="text-center" >
+      <li class="" >
         <router-link to="/profile/index"  v-if="data.user.role[0].name === 'GP' || data.user.role[0].name === 'Client'" class="dropdown-item">
-          <i class="me-2 icon-md" data-feather="user"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+          </svg>
           <span class="text-dark">Profile</span>
         </router-link>
         <router-link to="/users/index" v-else-if="data.user.role[0].name === 'admin'" class="dropdown-item">
-          <i class="me-2 icon-md" data-feather="user"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+          </svg>
           <span class="text-dark">Admin</span>
         </router-link>
       </li>
 
-      <li class="dropdown-item text-center">
+      <li class="dropdown-item ">
         <button @click="handleLogout" type="submit" class="text-body ms-0 bg-transparent border-0 p-0">
-          <i class="me-2 icon-md" data-feather="log-out"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+          </svg>
           <span class="text-dark text-center">Déconnexion</span>
         </button>
       </li>
@@ -154,7 +162,11 @@ body {
   padding: 30px;
   background-color: #FFFFFF;
 }
-
+button.btn.dropdown-toggle {
+  border: none !important;
+  padding: 0px;
+  margin-left: 20px;
+}
 a {
   text-decoration: none;
   color: #000000;

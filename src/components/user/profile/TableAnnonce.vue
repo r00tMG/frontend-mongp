@@ -40,6 +40,9 @@ onMounted(async () => {
             <td class="text-center" v-text="annonce.date_arrivee"></td>
             <td class="text-center" v-text="annonce.description"></td>
           </tr>
+          <tr v-else>
+            <p class="text-light text-center bg-danger p-5 rounded-5 ">Aucun annonce n'a été trouvé</p>
+          </tr>
         </tbody>
       </table>
     </div>

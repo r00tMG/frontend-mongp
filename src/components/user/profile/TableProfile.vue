@@ -41,7 +41,7 @@ export default {
     <div class="col-12 grid-margin">
       <div class="card mb-4 border border-success">
         <div class="position-relative">
-          <figure class="overflow-hidden mb-0 d-flex justify-content-center height">
+          <figure class="overflow-hidden mb-0 justify-content-center height">
             <img :src="profile.user.storage + '/' + profile.user.photo_profile" class="rounded-top" alt="profile cover">
           </figure>
           <div class="d-flex justify-content-between position-absolute align-items-center w-100 px-2 px-md-4 mt-n4">
@@ -67,6 +67,9 @@ export default {
         </div>
       </div>
     </div>
+  </div>
+  <div v-else>
+      <p class="text-light text-center bg-danger p-5 rounded-5 ">Veuillez compléter votre profile</p>
   </div>
   <div class="row profile-body" v-if="profile.profiles" v-for="profile in profile.profiles">
     <!-- left wrapper start -->
@@ -182,17 +185,15 @@ export default {
         <div class="col-md-12 grid-margin">
           <div class="card rounded border border-success">
             <div class="card-body">
-              <h6 class="card-title">Réservations</h6>
+              <h6 class="card-title mb-4 text-center">Réservations</h6>
               <div class="row ms-0 me-0">
-                <a href="javascript:;" class="col-md-4 ps-1 pe-1">
+                <a href="javascript:;" class="col-md-4 m-auto ps-1 pe-1">
                   <figure class="mb-2">
                     <p class="">
-                      <span class="text-success fs-3">Connexion</span>
                       <span class="step-number me-3">1</span>
                     </p>
                   </figure>
                 </a>
-
               </div>
             </div>
           </div>
@@ -200,7 +201,9 @@ export default {
       </div>
     </div>
   </div>
-
+  <div v-else>
+    <p class="text-light text-center bg-danger p-5 rounded-5 ">Aucun utilisateur n'a été trouvé</p>
+  </div>
 </template>
 
 <style scoped>

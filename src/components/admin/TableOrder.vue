@@ -16,7 +16,7 @@ onMounted(async ()=>{
 <template>
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
-      <h4 class="text-success">Les Commandes</h4>
+      <h4 class="text-success">Les réservations</h4>
     </div>
     <div class=" table-responsive">
       <table class="table table-bordered table-striped">
@@ -44,6 +44,9 @@ onMounted(async ()=>{
           <td class="text-center" v-else><span class="badge bg-success">{{ annonce.demande.status }}</span></td>
           <td class="text-center" v-if="annonce.demande.status === 'confirmé'"><span class="badge bg-success ">{{ annonce.status }}</span></td>
           <td class="text-center" v-else><span class="badge bg-danger ">pending</span></td>
+        </tr>
+        <tr v-else>
+          <p class="text-light text-center bg-danger p-5 rounded-5 ">Aucune résarvation n'a été trouvé</p>
         </tr>
         </tbody>
       </table>
