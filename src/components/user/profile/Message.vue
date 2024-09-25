@@ -323,7 +323,7 @@ export default {
       if (newMessage.value.trim() === '') return; // Vérifie que le message n'est pas vide
 
       try {
-        const response = await axios.post('/api/messages', {
+        const response = await axios.post('/messages', {
           contenu: newMessage.value,
           emetteur_id: userId.value,
           recepteur_id: props.recipientId,
