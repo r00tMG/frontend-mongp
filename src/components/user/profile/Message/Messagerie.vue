@@ -65,7 +65,7 @@ export default {
         });
         const message = await response.data.message
         console.log('message envoyé',message)
-        messages.value.push(response.data);
+        messages.value.push(response.data.message);
         console.log('Les messages envoyés',messages.value)
 
         contenu.value = '';
