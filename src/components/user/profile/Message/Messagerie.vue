@@ -137,6 +137,7 @@ const submit = async (e) =>{
                 <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
               <div class="received_msg" >
+                <h5>{{message.recepteur.name}}</h5>
                 <div class="received_withd_msg">
                   <p>{{message.contenu}}</p>
                   <span class="time_date"> 11:01 AM {{new Date(message.date_envoi).toLocaleString()}}    |    June 9</span></div>
