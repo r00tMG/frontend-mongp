@@ -282,6 +282,7 @@ img{ max-width:100%;}
 }
 </style>-->
 <template>
+
   <div>
     <div class="chat-window">
       <div v-for="message in messages" :key="message.id">
@@ -313,6 +314,7 @@ export default {
     const messages = ref([]);
     const newMessage = ref('');
     const userId = ref(JSON.parse(localStorage.getItem('data')).user.id);
+    const users = ref([])
 
     const getMessages = async () => {
       const response = await axios.get(`/messages/${props.recipientId}`);
@@ -339,12 +341,19 @@ export default {
 
 
 
-    onMounted(() => {
-      getMessages();
-      window.Echo.private(`chat.${props.recipientId}`)
+    onMounted(async () => {
+      await getMessages();
+       window.Echo.private(`chat.${props.recipientId}`)
           .listen('MessageSent', (e) => {
             messages.value.push(e.contenu);
           });
+      const r = await axios.get('/users',{
+        headers:{
+          'Authorization':`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+       users.value = await r.data
+      console.log(users.value)
     });
 
     return {
