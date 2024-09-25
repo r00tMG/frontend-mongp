@@ -328,8 +328,8 @@ export default {
           emetteur_id: userId.value,
           recepteur_id: props.recipientId,
         });
-
-        // Ajouter le nouveau message à la liste
+        const message = await response.data
+        console.log(message)
         messages.value.push(response.data);
         newMessage.value = ''; // Réinitialiser le champ de saisie
       } catch (error) {
