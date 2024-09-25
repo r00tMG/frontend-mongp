@@ -312,7 +312,7 @@ export default {
   setup(props) {
     const messages = ref([]);
     const newMessage = ref('');
-    const userId = ref(1);
+    const userId = ref(JSON.parse(localStorage.getItem('data')).user.id);
 
     const getMessages = async () => {
       const response = await axios.get(`/messages/${props.recipientId}`);
@@ -320,15 +320,24 @@ export default {
     };
 
     const sendMessage = async () => {
-      if (!newMessage.value.trim()) return;
+      if (newMessage.value.trim() === '') return; // Vérifie que le message n'est pas vide
 
-      await axios.post('/messages', {
-        recepteur_id: props.recipientId,
-        contenu: newMessage.value,
-      });
+      try {
+        const response = await axios.post('/api/messages', {
+          contenu: newMessage.value,
+          emetteur_id: userId.value,
+          recepteur_id: props.recipientId,
+        });
 
-      newMessage.value = '';
+        // Ajouter le nouveau message à la liste
+        messages.value.push(response.data);
+        newMessage.value = ''; // Réinitialiser le champ de saisie
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi du message:', error);
+      }
     };
+
+
 
     onMounted(() => {
       getMessages();
