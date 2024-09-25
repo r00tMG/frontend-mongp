@@ -23,7 +23,7 @@ export default {
     const getMessages = async () => {
       const response = await axios.get(`/messages/${route.params.id}`);
       messages.value = response.data.messages;
-      console.log(messages.value)
+      console.log('message de l\'utilisateur connecté',messages.value)
     };
     const fetchAllusers = async ()=>{
       const r = await axios.get('/users', {
@@ -32,7 +32,7 @@ export default {
         }
       });
       users.value = await r.data.users;
-       console.log(users.value)
+       console.log('Liste des utilisateus',users.value)
     }
 
     const fetchUserSelected = async ()=>{
@@ -42,30 +42,32 @@ export default {
         }
       })
       discussion.value = await response.data.user
-      console.log(discussion.value)
+      console.log('l\'utilisateur selectionné',discussion.value)
     }
     onMounted(async () => {
 
         await fetchAllusers()
-
-        window.Echo.private(`chat.${route.params.id}`)
-            .listen('MessageSent', (e) => {
-              messages.value.push(e.contenu);
-            });
+      window.Echo.private(`chat.${route.params.id}`)
+          .listen('MessageSent', (e) => {
+            messages.value.push(e.message); // Vérifie que 'message' est bien la bonne clé
+          });
     });
 
     const sendMessage = async () => {
       if (contenu.value.trim() === '') return;
+      console.log('l\'id de l\'utilisateur connecté',userId.value)
 
       try {
         const response = await axios.post('/messages', {
           contenu: contenu.value,
-          emetteur_id: userId,
+          emetteur_id: userId.value,
           recepteur_id: route.params.id,
         });
         const message = await response.data.message
-        console.log(message)
+        console.log('message envoyé',message)
         messages.value.push(response.data);
+        console.log('Les messages envoyés',messages.value)
+
         contenu.value = '';
       } catch (error) {
         console.error('Erreur lors de l\'envoi du message:', error);
@@ -128,10 +130,10 @@ const submit = async (e) =>{
         </div>
       </div>
       <div class="mesgs">
-        <div class="msg_history" >
+        <div class="msg_history" >{{userId}}
           <div v-for="message in messages" :key="message.id">
-            <div class="incoming_msg" v-if="discussion" >
-              <div class="incoming_msg_img">
+            <div class="incoming_msg" v-if="message.recepteur_id === userId" >
+              <div class="incoming_msg_img" >
                 <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
               <div class="received_msg" >
@@ -141,7 +143,7 @@ const submit = async (e) =>{
               </div>
             </div>
             <div class="outgoing_msg">
-              <div class="sent_msg">
+              <div class="sent_msg" v-if="message.emetteur_id === userId">
                 <p>{{message.contenu}}</p>
                 <span class="time_date"> 11:01 {{new Date(message.date_envoi).toLocaleString()}} AM    |    June 9</span>
               </div>
