@@ -130,20 +130,20 @@ const submit = async (e) =>{
         </div>
       </div>
       <div class="mesgs">
-        <div class="msg_history" >{{userId}}
-          <div v-for="message in messages" :key="message.id">
-            <div class="incoming_msg" v-if="message.recepteur_id === userId" >
+        <div class="msg_history" >
+          <div v-if="messages" v-for="message in messages" :key="message.id">
+            <div class="incoming_msg" v-if="message.recepteur.id === userId" >
               <div class="incoming_msg_img" >
                 <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
               <div class="received_msg" >
                 <div class="received_withd_msg">
-                  <p></p>
+                  <p>{{message.contenu}}</p>
                   <span class="time_date"> 11:01 AM {{new Date(message.date_envoi).toLocaleString()}}    |    June 9</span></div>
               </div>
             </div>
             <div class="outgoing_msg">
-              <div class="sent_msg" v-if="message.emetteur_id === userId">
+              <div class="sent_msg" v-if="message.emetteur.id === userId">
                 <p>{{message.contenu}}</p>
                 <span class="time_date"> 11:01 {{new Date(message.date_envoi).toLocaleString()}} AM    |    June 9</span>
               </div>
