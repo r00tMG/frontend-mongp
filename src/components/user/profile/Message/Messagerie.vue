@@ -131,12 +131,12 @@ const submit = async (e) =>{
       </div>
       <div class="mesgs">
         <div class="msg_history" >
-          <div class="container rounded-1 p-2 bg-light fixed mb-3">
+<!--          <div class="container rounded-1 p-2 bg-light fixed mb-3">
             <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
             <div class="received_msg" >
               <h5>{{discussion.name}}</h5>
             </div>
-          </div>
+          </div>-->
           <div v-if="messages" v-for="message in messages" :key="message.id">
             <div class="incoming_msg" v-if="message.recepteur.id === userId" >
               <div class="incoming_msg_img" >
