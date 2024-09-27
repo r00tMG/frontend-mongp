@@ -44,16 +44,37 @@ export default {
       discussion.value = await response.data.user
       console.log('l\'utilisateur selectionné',discussion.value)
     }
+    const notifyUser = (message) => {
+      if (Notification.permission === "granted") {
+        new Notification("Nouveau message de " + message.emetteur.name, {
+          body: message.contenu,
+          icon: message.emetteur.storage + '/' + message.emetteur.photo_profile
+        });
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            new Notification("Nouveau message de " + message.emetteur.name, {
+              body: message.contenu,
+              icon: message.emetteur.storage + '/' + message.emetteur.photo_profile
+            });
+          }
+        });
+      }
+    };
+
     onMounted(async () => {
 
         await fetchAllusers()
       window.Echo.private(`chat.${route.params.id}`)
           .listen('MessageSent', (e) => {
-            messages.value.push(e.message); // Vérifie que 'message' est bien la bonne clé
+            messages.value.push(e.message);
             console.log('Nouveau message reçu:', e.message);
-            //notifyUser(e.message);
+            notifyUser(e.message);
           });
 
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+      }
     });
 
     const sendMessage = async () => {

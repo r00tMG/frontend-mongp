@@ -23,10 +23,7 @@ import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
 import TableOrder from "@/components/admin/TableOrder.vue";
 import Message from "@/components/user/profile/Message.vue";
 import Search from "@/components/user/home/Search.vue";
-import Users from "@/components/user/profile/Message/Users.vue";
-import Chat from "@/components/user/profile/Message/Chat.vue";
 import Messagerie from "@/components/user/profile/Message/Messagerie.vue";
-import MessageContent from "@/components/user/profile/Message/MessageContent.vue";
 
 const router = createRouter({
   //import.meta.env.BASE_URL
@@ -124,18 +121,7 @@ const router = createRouter({
           path: '/register',
           name: 'register',
           component: Register
-        },
-        {
-          path: '/user',
-          name: 'user',
-          component: Users
-        },
-        {
-          path: '/chat',
-          name: 'chat',
-          component: Chat
-        },
-
+        }
       ]
     },
     {
@@ -188,16 +174,15 @@ const router = createRouter({
         {
           path: '/messages',
           component: Messagerie,
-          meta: { requiresAuth: true },
-          children: [
-            {
-              path: '/messages/:id/:title',
-              name: 'message.show',
-              component: MessageContent,
-              meta: {requiresAuth: true}
-            }
-          ]
+          meta: {requiresAuth: true},
         },
+        {
+          path: '/messages/:id/:title',
+          name: 'message.show',
+          component: Messagerie,
+          meta: {requiresAuth: true}
+        }
+
       ]
     }
 
