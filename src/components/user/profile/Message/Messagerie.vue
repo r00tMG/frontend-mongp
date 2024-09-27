@@ -70,11 +70,13 @@ export default {
             messages.value.push(e.message);
             console.log('Nouveau message reçu:', e.message);
             notifyUser(e.message);
+            console.log('a')
           });
 
       if (Notification.permission !== "granted") {
         Notification.requestPermission();
       }
+
     });
 
     const sendMessage = async () => {
