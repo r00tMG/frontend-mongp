@@ -26,7 +26,7 @@ export default {
       console.log('message de l\'utilisateur connecté',messages.value)
     };
     const fetchAllusers = async ()=>{
-      const r = await axios.get('/users', {
+      const r = await axios.get('/getUsers', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -50,7 +50,10 @@ export default {
       window.Echo.private(`chat.${route.params.id}`)
           .listen('MessageSent', (e) => {
             messages.value.push(e.message); // Vérifie que 'message' est bien la bonne clé
+            console.log('Nouveau message reçu:', e.message);
+            //notifyUser(e.message);
           });
+
     });
 
     const sendMessage = async () => {
@@ -97,9 +100,9 @@ const submit = async (e) =>{
 </script>
 
 <template>
-  <div class="messaging">
+  <div class="messaging border border-success rounded-1">
     <div class="inbox_msg">
-      <div class="inbox_people">
+      <div class="inbox_people border border-success">
         <div class="headind_srch">
           <div class="recent_heading">
             <h4 class="text-success">Recent</h4>
@@ -114,44 +117,38 @@ const submit = async (e) =>{
           </div>
         </div>
         <div class="inbox_chat">
-          <div class="chat_list " v-for="user in filteredUsers" :key="user.id">
-          <router-link :to="`/messages/${user.id}`" @click="submit" class="text-decoration-none text-dark">
+          <router-link v-for="user in filteredUsers" :key="user.id" :to="`/messages/${user.id}/${user.name}`" :class="{ active_chat: $route.path === `/messages/${user.id}` }" @click="submit" class="">
+          <div class="chat_list"  >
             <div class="chat_people">
               <div class="chat_img">
                 <img :src="user.storage + '/' + user.photo_profile"  class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
               <div class="chat_ib">
-                <h5>{{ user.name }} <span class="chat_date">Dec 25</span></h5>
+                <h5 class="text-success">{{ user.name }}<span class="chat_date">Dec 25</span></h5>
                   <p>Message preview</p>
               </div>
             </div>
-          </router-link>
           </div>
+          </router-link>
         </div>
       </div>
       <div class="mesgs">
         <div class="msg_history" >
-<!--          <div class="container rounded-1 p-2 bg-light fixed mb-3">
-            <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
-            <div class="received_msg" >
-              <h5>{{discussion.name}}</h5>
-            </div>
-          </div>-->
           <div v-if="messages" v-for="message in messages" :key="message.id">
             <div class="incoming_msg" v-if="message.recepteur.id === userId" >
               <div class="incoming_msg_img" >
                 <img :src="discussion.storage + '/'+ discussion.photo_profile" class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
               <div class="received_msg" >
-                <h5>{{message.recepteur.name}}</h5>
+                <h5 class="text-success">{{discussion.name}}</h5>
                 <div class="received_withd_msg">
                   <p>{{message.contenu}}</p>
                   <span class="time_date"> 11:01 AM {{new Date(message.date_envoi).toLocaleString()}}    |    June 9</span></div>
               </div>
             </div>
-            <div class="outgoing_msg">
-              <div class="sent_msg" v-if="message.emetteur.id === userId">
-                <p>{{message.contenu}}</p>
+            <div class="outgoing_msg" v-if="message.emetteur.id === userId">
+              <div class="sent_msg" >
+                <p class="bg-success">{{message.contenu}}</p>
                 <span class="time_date"> 11:01 {{new Date(message.date_envoi).toLocaleString()}} AM    |    June 9</span>
               </div>
            </div>
@@ -160,7 +157,11 @@ const submit = async (e) =>{
         <div class="type_msg">
           <div class="input_msg_write">
             <input type="text" class="write_msg" v-model="contenu" placeholder="Type a message" />
-            <button class="msg_send_btn"  @click="sendMessage" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            <button class="msg_send_btn  btn btn-sm btn-success"  @click.prevent="sendMessage" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -240,7 +241,7 @@ img {
 }
 .inbox_chat { height: 550px; overflow-y: scroll;}
 
-.active_chat{ background:#ebebeb;}
+.active_chat{ background:#337447;}
 
 .incoming_msg_img {
   display: inline-block;
@@ -298,7 +299,7 @@ img {
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
 .msg_send_btn {
-  background: #05728f none repeat scroll 0 0;
+  /*background: #05728f none repeat scroll 0 0;*/
   border: medium none;
   border-radius: 50%;
   color: #fff;
@@ -310,7 +311,9 @@ img {
   top: 11px;
   width: 33px;
 }
-.messaging { padding: 0 0 50px 0;}
+.messaging {
+  /*padding: 0 0 50px 0;*/
+}
 .msg_history {
   height: 516px;
   overflow-y: auto;

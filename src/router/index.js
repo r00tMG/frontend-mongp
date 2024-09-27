@@ -191,7 +191,7 @@ const router = createRouter({
           meta: { requiresAuth: true },
           children: [
             {
-              path: '/messages/:id',
+              path: '/messages/:id/:title',
               name: 'message.show',
               component: MessageContent,
               meta: {requiresAuth: true}

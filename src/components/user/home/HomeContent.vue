@@ -63,7 +63,9 @@ import reserver from '@/assets/images/reserver.svg'
                   <span class="step-number me-3">1</span>
                   <span class="text-success fs-3">Connexion</span>
                 </p>
-                <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+                <p class="w-75 ">
+                  En tant que bénéficiaire de la gratuité partielle (GP), accédez facilement à votre compte en quelques clics. Connectez-vous avec vos identifiants pour gérer vos annonces, suivre les kilos disponibles et interagir avec les clients intéressés. Profitez d'une interface simple et sécurisée, conçue pour vous permettre de publier rapidement et de manière efficace.
+                </p>
               </div>
           </div>
             <img :src="connect" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">
@@ -77,7 +79,13 @@ import reserver from '@/assets/images/reserver.svg'
                 <span class="step-number me-3">2</span>
                 <span class="text-success fs-3">Publier</span>
               </p>
-              <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              <p class="w-75 ">
+                Une fois connecté, publiez vos kilos disponibles en quelques étapes simples.
+                Ajoutez des détails tels que la quantité, la date et les lieux de récupération,
+                et mettez vos annonces à la disposition des utilisateurs qui recherchent des produits à récupérer.
+                Gagnez du temps grâce à un système de publication optimisé qui vous permet de gérer vos kilos de manière fluide
+                et intuitive.
+              </p>
             </div>
           </div>
           <img :src="publish" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">
@@ -91,7 +99,12 @@ import reserver from '@/assets/images/reserver.svg'
                 <span class="step-number me-3">3</span>
                 <span class="text-success fs-3">Rechercher</span>
               </p>
-              <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              <p class="w-75 ">
+                Grâce à notre système de recherche intuitif,
+                trouvez rapidement les kilos disponibles mis en ligne par les bénéficiaires de la gratuité partielle (GP).
+                Filtrez par origine, destination, et date pour repérer les offres qui correspondent à vos besoins.
+                Chaque annonce est mise à jour en temps réel, vous garantissant une recherche fluide et précise.
+              </p>
             </div>
           </div>
           <img :src="recherche" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">
@@ -105,7 +118,12 @@ import reserver from '@/assets/images/reserver.svg'
                 <span class="step-number me-3">4</span>
                 <span class="text-success fs-3">Réserver</span>
               </p>
-              <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              <p class="w-75 ">
+                Une fois que vous avez trouvé les kilos qui vous intéressent,
+                réservez-les en quelques clics. Sélectionnez la quantité
+                et recevez une confirmation immédiate de votre réservation.
+                Planifiez vos récupérations en toute simplicité grâce à notre interface de réservation efficace et transparente.
+              </p>
             </div>
           </div>
           <img :src="reserver" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">
@@ -119,7 +137,11 @@ import reserver from '@/assets/images/reserver.svg'
                 <span class="step-number me-3">5</span>
                 <span class="text-success fs-3">Payer par carte</span>
               </p>
-              <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              <p class="w-75 ">
+                Effectuez vos paiements directement en ligne avec une carte de crédit ou de débit en toute sécurité.
+                Notre plateforme de paiement est rapide et fiable, vous permettant de finaliser vos réservations sans souci.
+                Vos informations de paiement sont protégées grâce à des standards de sécurité de pointe.
+              </p>
             </div>
           </div>
           <img :src="payment" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">
@@ -133,7 +155,11 @@ import reserver from '@/assets/images/reserver.svg'
                 <span class="step-number me-3">6</span>
                 <span class="text-success fs-3">Communication</span>
               </p>
-              <p class="w-50 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci dolor, eos est </p>
+              <p class="w-75 ">
+                Restez en contact avec les GP et les autres utilisateurs grâce à notre système de messagerie intégré.
+                Posez des questions, organisez la récupération des kilos ou échangez des informations en toute simplicité.
+                Une communication fluide et rapide pour un service transparent et réactif.
+              </p>
             </div>
           </div>
           <img :src="message" class="col-md-4 shadow border rounded-5 img-fluid" alt="#">

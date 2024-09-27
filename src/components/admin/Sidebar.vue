@@ -6,15 +6,6 @@ import users from '@/assets/images/users.svg'
 
 <template>
   <div class="col-md-2 sidebar ">
-<!--    <div class="profile mt-5">
-      <img src="#"  alt="Photo Profile" class="rounded-circle" width="100" height="100">
-      <div  >
-        <div class="name" >
-        </div>
-        <div class="job" >
-        </div>
-      </div>
-    </div>-->
 
     <div class="sidenav-url " >
       <div class="url">

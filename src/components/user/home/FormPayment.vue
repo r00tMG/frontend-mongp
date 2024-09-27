@@ -1,5 +1,5 @@
 <template>
-  <div class="w-50 m-5 border rounded-4 p-5 border-success m-auto">
+  <div class="w-50 m-5 border rounded-4 shadow p-5 border-success m-auto">
     <h4 class="bg-success p-3 text-center text-white rounded-4">Valider votre achat</h4>
     <form @submit.prevent="handleSubmit">
 
