@@ -120,6 +120,7 @@ const submit = async (e) =>{
     };
   }
 }
+
 </script>
 
 <template>
@@ -197,6 +198,9 @@ const submit = async (e) =>{
 
 
 <style scoped>
+
+
+
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {

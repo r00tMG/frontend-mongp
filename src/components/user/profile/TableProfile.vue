@@ -2,16 +2,36 @@
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 
+
 export default {
   name: 'TableProfile',
   setup(){
     let token = localStorage.getItem('token')
     const data = JSON.parse(localStorage.getItem('data'))
     const roles = data.user.role
+    const reservations = ref([])
+    const annonces = ref([])
     //console.log(user.id)
     //console.log(roles)
     const profile = ref({ profiles: [] })
-
+    const fetchReservation = async ()=>{
+      const r = await axios.get('/demandes', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      reservations.value = await r.data
+      console.log('Mes réservations:', reservations.value)
+    }
+    const fetchAnnonce = async ()=>{
+      const r = await axios.get('/annonces',{
+        headers: {
+          'Accept':'application/json',
+          'Authorization':`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      annonces.value = r.data.annonces
+    }
     onMounted(async () => {
       try {
         const response = await axios.get(`/profiles`, {
@@ -25,11 +45,17 @@ export default {
       } catch (error) {
         console.error('Erreur lors de la récupération des profils:', error)
       }
+      await fetchReservation()
+      await fetchAnnonce()
+
 
     })
+
     return{
       profile,
-      roles
+      roles,
+      reservations,
+      annonces
     }
   }
 }
@@ -86,7 +112,7 @@ export default {
   </div>
   <div class="row profile-body" v-if="profile.profiles" v-for="profile in profile.profiles">
     <!-- left wrapper start -->
-    <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
+    <div class="d-none d-md-block col-md-2  left-wrapper">
       <div class="card rounded border border-success">
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between mb-2">
@@ -141,50 +167,89 @@ export default {
     </div>
     <!-- left wrapper end -->
     <!-- middle wrapper start -->
-    <div class="col-md-8 col-xl-6 middle-wrapper">
+    <div class="col-md-8  middle-wrapper">
       <div class="row">
-        <div class="col-md-12 grid-margin">
-          <div class="card rounded border border-success">
-            <div class="card-header">
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                  <img class="img-xs rounded-circle" src="#" alt="">
-                  <div class="ms-2">
-                    <p>Mike Popescu</p>
-                    <p class="tx-11 text-muted">1 min ago</p>
-                  </div>
+        <div class="col-md-12 grid-margin" v-if="roles[0].name === 'GP'">
+          <h4>Mes annonces</h4>
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="annonce in annonces" :key="annonce.id">
+            <div class="card-header bg-white border-0">
+              <div class="d-flex justify-content-between align-items">
+                <div>
+                  <img class="rounded-circle" :src="`${annonce.user.storage}/${annonce.user.photo_profile}`" width="40px" height="40px" alt="Photo Profile">
+                  {{ annonce.user.name }}
                 </div>
-                <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="icon-lg pb-3px" data-feather="more-horizontal"></i>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="meh" class="icon-sm me-2"></i> <span class="">Unfollow</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="corner-right-up" class="icon-sm me-2"></i> <span class="">Go to post</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="share-2" class="icon-sm me-2"></i> <span class="">Share</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="copy" class="icon-sm me-2"></i> <span class="">Copy link</span></a>
-                  </div>
+                <div>
+                  <p class="text-muted mt-1">Publiée il y a {{ Math.abs(new Date(annonce.date_now).getHours() - new Date(annonce.created_at).getHours()) }}h</p>
                 </div>
               </div>
             </div>
-            <div class="card-body">
-              <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus minima delectus nemo unde quae recusandae assumenda.</p>
-              <img class="img-fluid" src="#" alt="">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="card-body border-success rounded-5 shadow border">
+                  <div class="row p-5">
+                    <div class="col-md-3">
+                      <h4 class="card-title">Départ</h4>
+                      <div class="card-title text-success"><strong>{{ new Date(annonce.date_depart).toLocaleDateString() }}</strong></div>
+                      <div class="card-title text-success"><strong>{{(new Date(annonce.date_depart).getHours().toString())}}h {{(new Date(annonce.date_depart).getMinutes().toString())}}min</strong></div>
+                      <div class="card-title">{{ annonce.origin }}</div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <div class="m-auto">
+                        <div class="card-title text-success">{{Math.abs((new Date(annonce.date_arrivee).getHours().toString()) - (new Date(annonce.date_depart).getHours().toString()))}}h {{Math.abs((new Date(annonce.date_arrivee).getMinutes().toString()) - (new Date(annonce.date_depart).getMinutes().toString()))}}min</div>
+                        <hr class="border-success border-2">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="card-title">Arrivée</h4>
+                      <div class="card-title text-success"><strong>{{ new Date(annonce.date_arrivee).toLocaleDateString() }}</strong></div>
+                      <div class="card-title text-success"><strong>{{(new Date(annonce.date_arrivee).getHours().toString())}}h {{(new Date(annonce.date_arrivee).getMinutes().toString())}}min</strong></div>
+                      <div class="card-title">{{ annonce.destination }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 ">
+                <h4 class="card-title mt-5">Poids</h4>
+                <div class="card-title"><span class="text-muted">Disponible</span></div>
+                <div class="card-title"><strong>{{ annonce.kilos_disponibles }} Kg</strong></div>
+                <a :href="`/annonces/${annonce.id}`" class="btn btn-sm btn-success rounded-4">Réserver</a>
+              </div>
             </div>
-            <div class="card-footer">
-              <div class="d-flex post-actions">
-                <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                  <i class="icon-md" data-feather="heart"></i>
-                  <p class="d-none d-md-block ms-2">Like</p>
-                </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted me-4">
-                  <i class="icon-md" data-feather="message-square"></i>
-                  <p class="d-none d-md-block ms-2">Comment</p>
-                </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted">
-                  <i class="icon-md" data-feather="share"></i>
-                  <p class="d-none d-md-block ms-2">Share</p>
-                </a>
+          </div>
+        </div>
+        <div class="border border-success " v-else-if="roles[0].name === 'Client'">
+          <h4>Mes réservations</h4>
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="reservation in reservations" :key="reservation.id">
+            <div class="row">
+              <div class="col-md-10">
+                <div class="card-body border-success rounded-5 shadow border">
+                  <div class="row p-5">
+                    <div class="col-md-3">
+                      <h4 class="card-title">Départ</h4>
+                      <div class="card-title text-success"><strong>{{ new Date(reservation.annonce.date_depart).toLocaleDateString() }}</strong></div>
+                      <div class="card-title text-success"><strong>{{(new Date(reservation.annonce.date_depart).getHours().toString())}}h {{(new Date(reservation.annonce.date_depart).getMinutes().toString())}}min</strong></div>
+                      <div class="card-title">{{ reservation.annonce.origin }}</div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <div class="m-auto">
+                        <div class="card-title text-success">{{Math.abs((new Date(reservation.annonce.date_arrivee).getHours().toString()) - (new Date(reservation.annonce.date_depart).getHours().toString()))}}h {{Math.abs((new Date(reservation.annonce.date_arrivee).getMinutes().toString()) - (new Date(reservation.annonce.date_depart).getMinutes().toString()))}}min</div>
+                        <hr class="border-success border-2">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <h4 class="card-title">Arrivée</h4>
+                      <div class="card-title text-success"><strong>{{ new Date(reservation.annonce.date_arrivee).toLocaleDateString() }}</strong></div>
+                      <div class="card-title text-success"><strong>{{(new Date(reservation.annonce.date_arrivee).getHours().toString())}}h {{(new Date(reservation.annonce.date_arrivee).getMinutes().toString())}}min</strong></div>
+                      <div class="card-title">{{ reservation.annonce.destination }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 ">
+                <h4 class="card-title mt-5">Poids</h4>
+                <div class="card-title"><span class="text-muted">Réservés</span></div>
+                <div class="card-title"><strong>{{ reservation.kilos_demandes }} Kg</strong></div>
+                <a :href="`/annonces/${reservation.id}`" class="btn btn-sm btn-success rounded-4">Détails</a>
               </div>
             </div>
           </div>
@@ -193,20 +258,38 @@ export default {
     </div>
     <!-- middle wrapper end -->
     <!-- right wrapper start -->
-    <div class="d-none d-xl-block col-xl-3">
+    <div class="d-none col-md-2 d-xl-block ">
+      <div class="row mb-3" v-if="roles[0].name === 'GP'">
+        <div class="col-md-12  grid-margin">
+          <div class="card rounded border border-success">
+            <div class="card-body">
+              <h6 class="card-title mb-4 text-center">Annonces</h6>
+              <div class="row ms-0 me-0">
+                <p  class="col-md-4 m-auto ps-1 pe-1">
+                  <div class="mb-2">
+                    <p class="">
+                      <span class="step-number me-3">{{annonces.length}}</span>
+                    </p>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12 grid-margin">
           <div class="card rounded border border-success">
             <div class="card-body">
               <h6 class="card-title mb-4 text-center">Réservations</h6>
               <div class="row ms-0 me-0">
-                <a href="javascript:;" class="col-md-4 m-auto ps-1 pe-1">
-                  <figure class="mb-2">
+                <p  class="col-md-4 m-auto ps-1 pe-1">
+                  <div class="mb-2">
                     <p class="">
-                      <span class="step-number me-3">1</span>
+                      <span class="step-number me-3">{{reservations.length}}</span>
                     </p>
-                  </figure>
-                </a>
+                  </div>
+                </p>
               </div>
             </div>
           </div>
