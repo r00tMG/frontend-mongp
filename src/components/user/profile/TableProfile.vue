@@ -32,6 +32,7 @@ export default {
       })
       annonces.value = r.data.annonces
     }
+
     onMounted(async () => {
       try {
         const response = await axios.get(`/profiles`, {
@@ -47,15 +48,15 @@ export default {
       }
       await fetchReservation()
       await fetchAnnonce()
-
-
     })
+
+
 
     return{
       profile,
       roles,
       reservations,
-      annonces
+      annonces,
     }
   }
 }
@@ -168,9 +169,9 @@ export default {
     <!-- left wrapper end -->
     <!-- middle wrapper start -->
     <div class="col-md-8  middle-wrapper">
-      <div class="row">
-        <div class="col-md-12 grid-margin" v-if="roles[0].name === 'GP'">
-          <h4>Mes annonces</h4>
+      <div class="row bg-success rounded-1">
+        <div class="col-md-12  grid-margin" v-if="roles[0].name === 'GP'">
+          <h4 class="text-light">Mes annonces</h4>
           <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="annonce in annonces" :key="annonce.id">
             <div class="card-header bg-white border-0">
               <div class="d-flex justify-content-between align-items">
@@ -209,16 +210,17 @@ export default {
                 </div>
               </div>
               <div class="col-md-2 ">
-                <h4 class="card-title mt-5">Poids</h4>
+                <h4 class="card-title mt-4">Poids</h4>
                 <div class="card-title"><span class="text-muted">Disponible</span></div>
                 <div class="card-title"><strong>{{ annonce.kilos_disponibles }} Kg</strong></div>
-                <a :href="`/annonces/${annonce.id}`" class="btn btn-sm btn-success rounded-4">Réserver</a>
+                <a :href="`/annonces/${annonce.id}`" class="btn btn-sm btn-success mb-1 rounded-4">Réserver</a>
+                <button  class="btn btn-sm btn-danger rounded-4">Delete</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="border border-success " v-else-if="roles[0].name === 'Client'">
-          <h4>Mes réservations</h4>
+        <div class="border border-success" v-else-if="roles[0].name === 'Client'">
+          <h4 class="text-light">Mes réservations</h4>
           <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="reservation in reservations" :key="reservation.id">
             <div class="row">
               <div class="col-md-10">
@@ -259,7 +261,7 @@ export default {
     <!-- middle wrapper end -->
     <!-- right wrapper start -->
     <div class="d-none col-md-2 d-xl-block ">
-      <div class="row mb-3" v-if="roles[0].name === 'GP'">
+      <div class="row mb-3 " v-if="roles[0].name === 'GP'">
         <div class="col-md-12  grid-margin">
           <div class="card rounded border border-success">
             <div class="card-body">

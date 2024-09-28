@@ -65,8 +65,12 @@ const users = ref([])
             <span class="badge bg-primary p-1">Aucun role</span>
           </td>
           <td colspan="4" >
-            <button class="btn btn-sm btn-danger me-1" @click="onDelete(user.id)">Delete</button>
-            <router-link :to="`/users/${user.id}/edit`" class="btn btn-sm btn-success">Edit</router-link>
+            <button class="btn btn-sm btn-danger me-1" @click="onDelete(user.id)">
+              Delete
+            </button>
+            <router-link :to="`/users/${user.id}/edit`" class="btn btn-sm btn-success">
+              Edit
+            </router-link>
           </td>
         </tr>
         <tr v-else>

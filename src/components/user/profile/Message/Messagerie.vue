@@ -13,6 +13,7 @@ export default {
     const messages = ref([])
     const discussion = ref([])
     const userId = ref(JSON.parse(localStorage.getItem('data')).user.id)
+    const counts = ref('')
 
     const filteredUsers = computed(() => {
       if (!searchQuery.value) return users.value;
@@ -61,10 +62,23 @@ export default {
         });
       }
     };
+///messages/unread-count
+    const fetchUnReadCountMessage = async () =>{
+      const r = await axios.get(`/messages/unread/${JSON.parse(localStorage.getItem('data')).user.id}`,{
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+      })
+       counts.value = await r.data.unread_messages_by_discussion
+
+        //console.log(counts)
+      console.log('Compteur',counts.value)
+    }
 
     onMounted(async () => {
 
         await fetchAllusers()
+      await fetchUnReadCountMessage()
       window.Echo.private(`chat.${route.params.id}`)
           .listen('MessageSent', (e) => {
             messages.value.push(e.message);
@@ -116,7 +130,8 @@ const submit = async (e) =>{
       discussion,
       messages,
       userId,
-      submit
+      submit,
+      counts
     };
   }
 }
@@ -147,9 +162,15 @@ const submit = async (e) =>{
               <div class="chat_img">
                 <img :src="user.storage + '/' + user.photo_profile"  class="rounded-circle border border-success img-fluid" width="40" height="40">
               </div>
-              <div class="chat_ib">
-                <h5 class="text-success">{{ user.name }}<span class="chat_date">Dec 25</span></h5>
-                  <p>Message preview</p>
+              <div class="chat_ib ">
+                <h5 class="text-success">{{ user.name }}
+                  <span class="chat_date text-danger" v-for="count in counts" :key="count.id">
+                    <template v-if="count.emetteur_id === user.id">
+                      {{ count.unread_count }}
+                    </template>
+                  </span>
+                </h5>
+                <p>Message preview</p>
               </div>
             </div>
           </div>
@@ -157,7 +178,7 @@ const submit = async (e) =>{
         </div>
       </div>
       <div class="mesgs">
-        <div class="msg_history" >
+        <div class="msg_history" v-if="discussion">
           <div v-if="messages" v-for="message in messages" :key="message.id">
             <div class="incoming_msg" v-if="message.recepteur.id === userId" >
               <div class="incoming_msg_img" >
@@ -198,7 +219,16 @@ const submit = async (e) =>{
 
 
 <style scoped>
+.icon-count{
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px;
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
 
+}
 
 
 .container{max-width:1170px; margin:auto;}

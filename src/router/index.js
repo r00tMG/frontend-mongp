@@ -21,7 +21,6 @@ import FormPayment from "@/components/user/home/FormPayment.vue";
 import Success from "@/components/user/home/Success.vue";
 import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
 import TableOrder from "@/components/admin/TableOrder.vue";
-import Message from "@/components/user/profile/Message.vue";
 import Search from "@/components/user/home/Search.vue";
 import Messagerie from "@/components/user/profile/Message/Messagerie.vue";
 
@@ -133,11 +132,11 @@ const router = createRouter({
     {
       path: '/profile',
       component: Profile,
-      meta: { requiresAuth: true },
+      //meta: { requiresAuth: true },
       children: [
         {
-          path: '/profile/index',
-          name: 'profile.index',
+          path: '',
+         // name: 'profile.index',
           component: TableProfile,
           meta: { requiresAuth: true }
         },
@@ -163,12 +162,6 @@ const router = createRouter({
           path: '/annonces/index',
           name: 'annonces.index',
           component: TableAnnonce,
-          meta: { requiresAuth: true }
-        },
-        {
-          path: '/messagerie/index',
-          name: 'message.index',
-          component: Message,
           meta: { requiresAuth: true }
         },
         {

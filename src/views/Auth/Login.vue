@@ -65,7 +65,7 @@ export default {
       console.log(profile.value.profiles.length)
       if (profile.value.profiles.length > 0)
       {
-        await router.push('/profile/index')
+        await router.push('/profile')
       }else{
         await router.push('/create/profile')
 

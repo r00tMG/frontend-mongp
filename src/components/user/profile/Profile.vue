@@ -25,7 +25,7 @@ import Dropdown from "@/components/Dropdown.vue";
         console.log(profile.value.profiles.length)
         if (profile.value.profiles.length > 0)
         {
-          await router.push('/profile/index')
+          await router.push('/profile')
         }else{
           await router.push('/create/profile')
         }
@@ -64,7 +64,7 @@ import Dropdown from "@/components/Dropdown.vue";
           <hr class="mb-5">
         </div>
         <div class="url">
-          <router-link to="/profile/index" class="fs-5" :class="{ active: $route.path === `/profile/index` }">
+          <router-link to="/profile" class="fs-5" :class="{ active: $route.path === `/profile/index` }">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle mb-1 me-2" viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>

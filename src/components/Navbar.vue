@@ -1,14 +1,30 @@
 <script>
 import Dropdown from '@/components/Dropdown.vue'
 import logo from '@/assets/images/logo.png'
+import axios from "@/axios.js";
+import {onMounted, ref} from "vue";
 export default {
   name: 'Navbar',
   components: { Dropdown },
   setup(){
     const token = localStorage.getItem('token')
+    const count = ref('')
+    const fetchUnReadCountMessage = async () =>{
+      const r = await axios.get(`/messages/unread/${JSON.parse(localStorage.getItem('data')).user.id}`,{
+        headers:{
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      count.value = await r.data.unread_messages_count
+      console.log('Compteur',count.value)
+    }
+    onMounted(()=>{
+      fetchUnReadCountMessage()
+    })
     return {
       token,
-      logo
+      logo,
+      count
     }
   }
 }
@@ -30,17 +46,13 @@ export default {
             </li>-->
           </ul>
             <li class="ms-2" v-if="token">
-              <router-link to="/messagerie/index">
-                <span class="icon-count">29</span>
+              <router-link to="/messages">
+                <span class="icon-count" v-if="count>0">{{count}}</span>
+                <span v-else></span>
                 <i class="fa fa-envelope fa-2x text-success"></i>
               </router-link>
             </li>
-            <li class="ms-2" v-if="token">
-              <a href="#notification">
-                <span class="icon-count">59</span>
-                <i class="fa fa-bell fa-2x text-success"></i>
-              </a>
-            </li>
+
           <Dropdown/>
         </div>
       </div>
