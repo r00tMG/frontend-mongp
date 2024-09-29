@@ -24,7 +24,16 @@ export default {
     const getMessages = async () => {
       const response = await axios.get(`/messages/${route.params.id}`);
       messages.value = response.data.messages;
-      console.log('message de l\'utilisateur connecté',messages.value)
+      //console.log('message de l\'utilisateur connecté',messages.value)
+
+      const r = await axios.put(`/messages/mark-as-read/${userId.value}`, {}, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const rep = await r.data
+      console.log(rep)
+
     };
     const fetchAllusers = async ()=>{
       const r = await axios.get('/getUsers', {
@@ -33,7 +42,7 @@ export default {
         }
       });
       users.value = await r.data.users;
-       console.log('Liste des utilisateus',users.value)
+       //console.log('Liste des utilisateus',users.value)
     }
 
     const fetchUserSelected = async ()=>{
@@ -43,7 +52,7 @@ export default {
         }
       })
       discussion.value = await response.data.user
-      console.log('l\'utilisateur selectionné',discussion.value)
+      //console.log('l\'utilisateur selectionné',discussion.value)
     }
     const notifyUser = (message) => {
       if (Notification.permission === "granted") {
@@ -62,40 +71,47 @@ export default {
         });
       }
     };
-///messages/unread-count
-    const fetchUnReadCountMessage = async () =>{
-      const r = await axios.get(`/messages/unread/${JSON.parse(localStorage.getItem('data')).user.id}`,{
-          headers:{
-            Authorization:`Bearer ${localStorage.getItem('token')}`
-          }
-      })
-       counts.value = await r.data.unread_messages_by_discussion
 
-        //console.log(counts)
-      console.log('Compteur',counts.value)
-    }
+    const fetchUnReadCountMessage = async () => {
+      const r = await axios.get(`/messages/unread/${userId.value}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      const unreadMessages = await r.data.unread_messages_by_discussion;
+
+      const unreadCountByUser = {};
+      unreadMessages.forEach((count) => {
+        unreadCountByUser[count.emetteur_id] = count.unread_count;
+      });
+      counts.value = unreadCountByUser;
+
+      console.log('Compteur des messages non lus par utilisateur', counts.value);
+    };
 
     onMounted(async () => {
 
         await fetchAllusers()
-      await fetchUnReadCountMessage()
-      window.Echo.private(`chat.${route.params.id}`)
-          .listen('MessageSent', (e) => {
-            messages.value.push(e.message);
-            console.log('Nouveau message reçu:', e.message);
-            notifyUser(e.message);
-            console.log('a')
-          });
+        await fetchUnReadCountMessage()
 
-      if (Notification.permission !== "granted") {
-        Notification.requestPermission();
+        window.Echo.private(`chat.${route.params.id}`)
+            .listen('MessageSent', (e) => {
+              messages.value.push(e.message);
+              notifyUser(e.message);
+            })
+            .listen('MessageRead', async () => {
+              await fetchUnReadCountMessage();
+            });
+
+        if (Notification.permission !== "granted") {
+          await Notification.requestPermission();
       }
 
     });
 
     const sendMessage = async () => {
       if (contenu.value.trim() === '') return;
-      console.log('l\'id de l\'utilisateur connecté',userId.value)
+      //console.log('l\'id de l\'utilisateur connecté',userId.value)
 
       try {
         const response = await axios.post('/messages', {
@@ -104,9 +120,9 @@ export default {
           recepteur_id: route.params.id,
         });
         const message = await response.data.message
-        console.log('message envoyé',message)
+        //console.log('message envoyé',message)
         messages.value.push(response.data.message);
-        console.log('Les messages envoyés',messages.value)
+        //console.log('Les messages envoyés',messages.value)
 
         contenu.value = '';
       } catch (error) {
@@ -131,7 +147,8 @@ const submit = async (e) =>{
       messages,
       userId,
       submit,
-      counts
+      counts,
+      route
     };
   }
 }
@@ -164,10 +181,8 @@ const submit = async (e) =>{
               </div>
               <div class="chat_ib ">
                 <h5 class="text-success">{{ user.name }}
-                  <span class="chat_date text-danger" v-for="count in counts" :key="count.id">
-                    <template v-if="count.emetteur_id === user.id">
-                      {{ count.unread_count }}
-                    </template>
+                  <span class="chat_date badge badge-pill bg-danger" v-if="counts[user.id]">
+                    {{ counts[user.id] }}
                   </span>
                 </h5>
                 <p>Message preview</p>
@@ -178,7 +193,7 @@ const submit = async (e) =>{
         </div>
       </div>
       <div class="mesgs">
-        <div class="msg_history" v-if="discussion">
+        <div class="msg_history" v-if="route.params.id">
           <div v-if="messages" v-for="message in messages" :key="message.id">
             <div class="incoming_msg" v-if="message.recepteur.id === userId" >
               <div class="incoming_msg_img" >
@@ -199,6 +214,7 @@ const submit = async (e) =>{
            </div>
           </div>
         </div>
+        <div class="msg_history" v-else>salut</div>
         <div class="type_msg">
           <div class="input_msg_write">
             <input type="text" class="write_msg" v-model="contenu" placeholder="Type a message" />
