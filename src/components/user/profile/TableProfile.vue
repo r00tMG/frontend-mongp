@@ -3,6 +3,7 @@ import {computed, onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
 import Swal from "sweetalert2";
+import {EventBus} from "@/eventBus.js";
 
 
 export default {
@@ -18,18 +19,21 @@ export default {
     //console.log(user.id)
     //console.log(roles)
     const profile = ref({ profiles: [] })
-const isLoading = ref(false)
+    const isLoading = ref(false)
 
     const fetchReservation = async ()=>{
+      EventBus.emit('show-loader');
       const r = await axios.get('/demandes', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
       reservations.value = await r.data
+        EventBus.emit('hide-loader');
       //console.log('Mes réservations:', reservations.value)
     }
     const fetchAnnonce = async ()=>{
+      EventBus.emit('show-loader');
       const r = await axios.get('/annonces',{
         headers: {
           'Accept':'application/json',
@@ -37,10 +41,12 @@ const isLoading = ref(false)
         }
       })
       annonces.value = r.data.annonces
+        EventBus.emit('hide-loader');
       //console.log(annonces.value)
     }
 
     onMounted(async () => {
+      EventBus.emit('show-loader');
       try {
         const response = await axios.get(`/profiles`, {
           headers: {
@@ -49,14 +55,16 @@ const isLoading = ref(false)
           }
         })
         profile.value = await response.data
-        //console.log(profile.value)
+        //console.log(profile.value)$
+        EventBus.emit('hide-loader');
+
       } catch (error) {
         console.error('Erreur lors de la récupération des profils:', error)
       }
       await fetchReservation()
       await fetchAnnonce()
-    })
 
+    })
     const filteredAnnonces = computed(() => {
       if (!searchQuery.value) return annonces.value;
       return annonces.value.filter((item) =>{
@@ -94,6 +102,8 @@ const isLoading = ref(false)
         })
       }
     }
+      //isLoading.value = false;
+
     return{
       profile,
       roles,
@@ -160,7 +170,7 @@ const isLoading = ref(false)
       <p class="text-light text-center bg-danger p-5 rounded-5 ">Veuillez compléter votre profile</p>
   </div>
   <div class="row profile-body" v-if="profile.profiles" v-for="profile in profile.profiles">
-    <!-- left wrapper start -->
+
     <div class="d-none d-md-block col-md-2  left-wrapper">
       <div class="card rounded border border-success">
         <div class="card-body">
@@ -214,13 +224,11 @@ const isLoading = ref(false)
         </div>
       </div>
     </div>
-    <!-- left wrapper end -->
-    <!-- middle wrapper start -->
     <div class="col-md-8  middle-wrapper">
-      <div class="row bg-success rounded-1">
+      <div class="row  rounded-1">
         <div class="col-md-12  grid-margin" v-if="roles[0].name === 'GP'">
           <div class="d-flex justify-content-between align-items">
-            <h4 class="text-light" >Mes annonces</h4>
+            <h4 class="" >Mes annonces</h4>
           </div>
           <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-if="filteredAnnonces.length !==0" v-for="annonce in filteredAnnonces" :key="annonce.id">
             <div class="card-header bg-white border-0">
@@ -274,8 +282,8 @@ const isLoading = ref(false)
             </div>
           </div>
         </div>
-        <div class="border border-success">
-          <h4 class="text-light">Mes réservations</h4>
+        <div class=" ">
+          <h4 class="">Mes réservations</h4>
           <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-if="filteredReservations.length !==0" v-for="reservation in filteredReservations" :key="reservation.id">
             <div class="row">
               <div class="col-md-10">

@@ -7,6 +7,7 @@ import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
 import planete from '@/assets/images/travel.svg'
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 const annonces = ref([]);
 const searchDepart = ref('');
 const searchArrivee = ref('');
@@ -17,6 +18,7 @@ const hasSearched = ref(false);
 const isLoading = ref(false)
 
 const searchAnnonces = async () => {
+      EventBus.emit('show-loader');
   if (searchDepart.value || searchArrivee.value || searchOrigin.value || searchDestination.value) {
     const r = await axios.get('/annonce_on_home', {
       params: {
@@ -29,9 +31,11 @@ const searchAnnonces = async () => {
     annonces.value = r.data.annonces;
     hasSearched.value = true;
   }
+        EventBus.emit('hide-loader');
 };
 
 const filteredAnnonces = computed(() => {
+
   if (searchDepart.value || searchArrivee.value || searchOrigin.value || searchDestination.value) {
     return annonces.value.filter((annonce) => {
       return (
@@ -41,6 +45,7 @@ const filteredAnnonces = computed(() => {
           annonce.destination.toLowerCase().includes(searchDestination.value.toLowerCase())
       );
     });
+
   } else {
     return [];
   }

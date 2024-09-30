@@ -2,11 +2,13 @@
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 
 const annonces = ref([])
 const isLoading = ref(true)
 
 onMounted(async () => {
+      EventBus.emit('show-loader');
   const r = await axios.get('/annonces',{
     headers: {
       'Accept':'application/json',
@@ -14,11 +16,13 @@ onMounted(async () => {
     }
   })
   annonces.value = r.data.annonces
+        EventBus.emit('hide-loader');
   //console.log(annonces.value)
 })
 </script>
 
 <template>
+  <Loader />
   <div class="mt-5">
       <div class="d-flex justify-content-between my-2">
         <h4 class="text-success">Mes annonces</h4>

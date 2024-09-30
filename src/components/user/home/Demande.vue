@@ -7,6 +7,7 @@ import {useRoute} from "vue-router";
 import SectionHomeContent from "@/components/user/home/SectionHomeContent.vue";
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 const annonce = ref([])
 const errors = ref({})
 const route = useRoute()
@@ -19,6 +20,8 @@ const isLoading = ref(false);
 
 const onDemander = async () => {
   try {
+      EventBus.emit('show-loader');
+
     const response = await axios.post('/demandes',{
       annonce_id:route.params.id,
       user_id:data.user.id,
@@ -30,6 +33,8 @@ const onDemander = async () => {
       }
     })
     const demande = await response.data.demande
+        EventBus.emit('hide-loader');
+
     //console.log(demande)
     if (response.data.status === 400) {
       errors.value = response.data.errors;
@@ -131,6 +136,7 @@ const onDemander = async () => {
 }
 
 onMounted(async () => {
+      EventBus.emit('show-loader');
   const r = await axios.get(`/annonces/${route.params.id}`,{
     headers:{
       'Accept':'application/json',
@@ -138,6 +144,7 @@ onMounted(async () => {
     }
   })
   annonce.value = await r.data.annonce
+        EventBus.emit('hide-loader');
 })
 </script>
 

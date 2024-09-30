@@ -5,6 +5,7 @@ import axios from "@/axios.js";
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 
 const route = useRoute()
 const name = ref('')
@@ -47,6 +48,7 @@ onMounted(async () => {
 const onSubmit = async () => {
   //console.log("Selected Permissions:", selectPermissions.value);
   try{
+    EventBus.emit('show-loader');
     const response = await axios.put(`/roles/${route.params.id}`,{
       name:name.value,
       permission:selectPermissions.value
@@ -59,11 +61,12 @@ const onSubmit = async () => {
     })
     //console.log(name,permission)
     data.value = await response.data
+    EventBus.emit('hide-loader');
     //console.log(data.value)
     if (response.data.status === 400) {
       errors.value = response.data.errors;
       //alert(response.data.message);
-      Swal.fire({
+      await Swal.fire({
         title: 'success',
         text: response.data.message,
         icon: 'success',
@@ -71,7 +74,7 @@ const onSubmit = async () => {
       })
     } else {
       await router.push('/roles/index');
-      Swal.fire({
+      await Swal.fire({
         title: 'success',
         text: response.data.message,
         icon: 'success',

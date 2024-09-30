@@ -3,18 +3,21 @@ import axios from "@/axios.js";
 import {ref} from "vue";
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 const order  = JSON.parse(localStorage.getItem('order'))
 const orderId = order.order.id
 const invoice_url = ref('')
 const isLoading = ref(false)
 
 const onUploads = async () => {
+      EventBus.emit('show-loader');
   const r = await axios.get(`/invoice/${orderId}`,{
     headers:{
       'Authorization':`Bearer ${localStorage.getItem('token')}`
     }
   })
    invoice_url.value = await r.data.invoice_url
+        EventBus.emit('hide-loader');
   //console.log(invoice_url.invoice_url)
   await Swal.fire({
     title: 'success',

@@ -4,6 +4,7 @@ import axios from '@/axios.js'
 import { useRoute } from "vue-router";
 import Loader from "@/components/Loader.vue";
 import logo from '@/assets/images/logo.png'
+import {EventBus} from "@/eventBus.js";
 export default {
   name: 'Messagerie',
   components: {Loader},
@@ -25,6 +26,7 @@ export default {
       );
     });
     const getMessages = async () => {
+
       const response = await axios.get(`/messages/${route.params.id}`);
       messages.value = response.data.messages;
       //console.log('message de l\'utilisateur connecté',messages.value)
@@ -39,12 +41,14 @@ export default {
 
     };
     const fetchAllusers = async ()=>{
+      EventBus.emit('show-loader');
       const r = await axios.get('/getUsers', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
       users.value = await r.data.users;
+        EventBus.emit('hide-loader');
        //console.log('Liste des utilisateus',users.value)
     }
 
@@ -76,6 +80,7 @@ export default {
     };
 
     const fetchUnReadCountMessage = async () => {
+      EventBus.emit('show-loader');
       const r = await axios.get(`/messages/unread/${userId.value}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -88,12 +93,11 @@ export default {
         unreadCountByUser[count.emetteur_id] = count.unread_count;
       });
       counts.value = unreadCountByUser;
-
+        EventBus.emit('hide-loader');
       console.log('Compteur des messages non lus par utilisateur', counts.value);
     };
 
     onMounted(async () => {
-
         await fetchAllusers()
         await fetchUnReadCountMessage()
 

@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 export default {
   name: 'UserCreate',
   components: {Loader},
@@ -39,6 +40,7 @@ const isLoading = ref(false)
     })
 
     const onRegister = async () => {
+      EventBus.emit('show-loader');
       const formData = new FormData()
       formData.append('name', name.value)
       formData.append('email', email.value)
@@ -67,6 +69,7 @@ const isLoading = ref(false)
 
         data.value = response.data
         console.log(data.value)
+        EventBus.emit('hide-loader');
         if (response.data.status === 400) {
           errors.value = response.data.errors;
           alert(response.data.message);

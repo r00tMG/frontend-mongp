@@ -5,10 +5,13 @@ import logo from '@/assets/images/logo.png';
 import axiosNoAuth from "@/axiosNoAuth.js";
 import axios from '@/axios.js'
 import Swal from "sweetalert2";
+import {EventBus} from "@/eventBus.js";
+import Loader from "@/App.vue";
 
 
 export default {
   name: 'Login',
+  components: {Loader},
   setup(){
     const email = ref('')
     const password = ref('')
@@ -16,6 +19,7 @@ export default {
     const errors = ref({})
     const onLogin = async () => {
       try{
+        EventBus.emit('show-loader');
         const response = await axiosNoAuth.post('/login', {
             email: email.value,
             password: password.value
@@ -24,6 +28,7 @@ export default {
         })
         const data = response.data
         console.log(data.user)
+        EventBus.emit('hide-loader');
        if(data.token && (data.user.role[0].name === "admin") )
         {
           localStorage.setItem('token', data.token)
@@ -83,6 +88,7 @@ export default {
 </script>
 
 <template>
+  <Loader />
   <div class="container">
     <div class="row border rounded-1 m-5 shadow-sm border-success">
       <div class="col-md-6  bg-success ">

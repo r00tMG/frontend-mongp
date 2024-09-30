@@ -2,11 +2,13 @@
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 
 const demandes = ref([])
 const isLoading = ref(false)
 
 onMounted(async ()=>{
+      EventBus.emit('show-loader');
   const r = await axios.get('/demandes', {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -14,6 +16,7 @@ onMounted(async ()=>{
   })
   demandes.value = await r.data
   console.log(demandes.value)
+        EventBus.emit('hide-loader');
 })
 </script>
 

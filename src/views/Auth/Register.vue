@@ -4,9 +4,12 @@ import { useRouter } from 'vue-router'
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
 import axiosNoAuth from "@/axiosNoAuth.js";
+import {EventBus} from "@/eventBus.js";
+import Loader from "@/App.vue";
 
 export default {
   name: 'Register',
+  components: {Loader},
   setup(){
     const name = ref('')
     const email = ref('')
@@ -35,6 +38,7 @@ export default {
 
     })
     const onRegister = async () => {
+      EventBus.emit('show-loader');
       const formData = new FormData()
       formData.append('name', name.value)
       formData.append('email', email.value)
@@ -52,6 +56,7 @@ export default {
           },
         })
          data.value = response.data
+        EventBus.emit('hide-loader');
         if (response.data.status === 400) {
           errors.value = response.data.errors;
           await Swal.fire({
@@ -97,6 +102,7 @@ export default {
 </script>
 
 <template>
+  <Loader />
 <div class="container">
   <div class="row border rounded-1 m-5 shadow-sm border-success">
     <div class=" bg-success col-md-6">

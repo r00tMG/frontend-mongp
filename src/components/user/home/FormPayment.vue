@@ -19,6 +19,7 @@ import axios from '@/axios.js';
 import {useRoute, useRouter} from "vue-router";
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 //4242 4242 4242 4242
 export default {
   components: {Loader},
@@ -45,12 +46,16 @@ export default {
     };
 
     onMounted( async () => {
+      EventBus.emit('show-loader');
+
       const response = await axios.get(`demandes/${route.params.id}`,{
         headers:{
           'Authorization':`Bearer ${localStorage.getItem('token')}`
         }
       })
        demande.value = await response.data
+        EventBus.emit('hide-loader');
+
       //console.log(demande.value)
       if (demande.value)
       {
@@ -67,6 +72,7 @@ export default {
     });
 //console.log(JSON.parse(localStorage.getItem('maDemande')).prix_de_la_demande)
     const handleSubmit = async () => {
+      EventBus.emit('show-loader');
       processing.value = true;
 
         const { data } = await axios.post('/payment-intent', {
@@ -76,6 +82,7 @@ export default {
           }
         });
        const clientSecret = data.clientSecret;
+        EventBus.emit('hide-loader');
       console.log(clientSecret)
       const result = await stripe.value.confirmCardPayment(clientSecret, {
         payment_method: {

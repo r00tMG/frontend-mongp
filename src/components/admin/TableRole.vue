@@ -2,10 +2,13 @@
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
+import Swal from "sweetalert2";
 const roles = ref([])
 const isLoading = ref(false)
 
   onMounted(async () => {
+      EventBus.emit('show-loader');
     const r = await axios.get('/roles',{
       headers:{
         'Accept':'application/json',
@@ -14,19 +17,26 @@ const isLoading = ref(false)
     })
      roles.value = await r.data
     //console.log(roles.value.roles.length)
-
+        EventBus.emit('hide-loader');
   })
 const onDelete = async (id) =>{
   //console.log(id)
   if (confirm('Êtes-vous sûr de vouloir supprimer ce role ?')) {
-
+      EventBus.emit('show-loader');
     const r = await axios.delete(`http://backend.test/api/roles/${id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     })
     const data = r.data
-    alert(data.message)
+        EventBus.emit('hide-loader');
+    //alert(data.message)
+    await Swal.fire({
+      title:'success',
+      text:data.message,
+      icon:'success',
+      confirmButton:'Ok'
+    })
   }
 }
 

@@ -3,10 +3,13 @@ import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 const users = ref([])
 const isLoading = ref(false)
 
   onMounted(async () => {
+      EventBus.emit('show-loader');
+
     const r = await axios.get('/users',{
       headers:{
         'Accept':'application/json',
@@ -14,11 +17,14 @@ const isLoading = ref(false)
       }
     })
      users.value = await r.data
-    console.log(users.value)
+    //console.log(users.value)
+        EventBus.emit('hide-loader');
+
   })
   const onDelete = async (id) => {
     console.log(id)
     if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      EventBus.emit('show-loader');
       const r = await axios.delete(`/users/${id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -26,6 +32,7 @@ const isLoading = ref(false)
       })
       const data = await r.data
       console.log(data)
+        EventBus.emit('hide-loader');
       await Swal.fire({
         title:'success',
         text: data.message,

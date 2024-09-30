@@ -6,6 +6,7 @@ import axios from "@/axios.js";
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 export default {
   name: 'EditProfile',
   components: {Loader, Navbar },
@@ -27,6 +28,7 @@ export default {
     const isLoading = ref(false)
 
     onMounted(async () => {
+      EventBus.emit('show-loader');
       const r = await axios.get(`/profiles/${route.params.id}`,{
         headers: {
           'Accept':'application/json',
@@ -40,11 +42,12 @@ export default {
       job.value = profile.value.profiles[0].job
       skill.value = profile.value.profiles[0].skill
       user_id.value = getUser.id
-
+      EventBus.emit('hide-loader');
     })
 
     const onSubmit = async () => {
       try{
+      EventBus.emit('show-loader');
         const response = await axios.put(`/profiles/${route.params.id}`,{
           address:address.value,
           hobbies: hobbies.value,
@@ -61,6 +64,7 @@ export default {
         })
 
         profile.value =await response.data
+        EventBus.emit('hide-loader');
         //console.log(profile.value)
         if (response.data.status === 400) {
           errors.value = response.data.errors;
@@ -89,7 +93,6 @@ export default {
           console.error("Error: La requête a échoué", error);
         }
       }
-
 
     }
     return{

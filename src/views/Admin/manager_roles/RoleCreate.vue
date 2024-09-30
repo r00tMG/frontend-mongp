@@ -5,6 +5,7 @@ import axios from "@/axios.js";
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
 import Loader from "@/components/Loader.vue";
+import {EventBus} from "@/eventBus.js";
 const name = ref('');
 const permissions = ref([]);
 const allPermissions = ref([]);
@@ -27,6 +28,7 @@ const fetchPermissions = async () => {
 };
 
 const submitForm = async () => {
+  EventBus.emit('show-loader');
   try {
     const response = await axios.post('/roles', {
       name: name.value,
@@ -39,7 +41,9 @@ const submitForm = async () => {
     });
     const role = await response.data
     console.log(role)
-    // Rediriger vers la page des rôles si la création est réussie
+    EventBus.emit('hide-loader');
+    // Rediriger vers la page d
+    // es rôles si la création est réussie
     if (role.status === 201) {
       Swal.fire({
         title:'success',
