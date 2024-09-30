@@ -26,7 +26,7 @@ import reserver from '@/assets/images/reserver.svg'
         </div>
         <div class="container">
           <div class="row m-auto px-4 py-5   ">
-            <div class="row">
+            <div class="row m-auto">
               <div class="col-md-2 m-auto text-center">
                 <router-link to="/search/annonces" class="btn btn-success text-center shadow-sm rounded-5 mt-4 p-3">
                   Commencer

@@ -2,6 +2,7 @@
 import {computed, onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
+import Swal from "sweetalert2";
 
 
 export default {
@@ -76,6 +77,23 @@ const isLoading = ref(false)
           }
       );
     });
+    const onDelete = async (id)=>{
+      if(confirm('Êtes-vous sûre?')){
+        const r = await axios.delete(`/annonces/${id}`,{
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        const rep = await r.data
+        console.log(rep)
+        await Swal.fire({
+          title:'success',
+          text:rep.message,
+          icon:'success',
+          confirmButton:'Ok'
+        })
+      }
+    }
     return{
       profile,
       roles,
@@ -84,7 +102,8 @@ const isLoading = ref(false)
       isLoading,
       searchQuery,
       filteredAnnonces,
-      filteredReservations
+      filteredReservations,
+      onDelete
     }
   }
 }
@@ -245,7 +264,7 @@ const isLoading = ref(false)
                 <div class="card-title"><span class="text-muted">Disponible</span></div>
                 <div class="card-title"><strong>{{ annonce.kilos_disponibles }} Kg</strong></div>
                 <a :href="`/annonces/${annonce.id}`" class="btn btn-sm btn-success mb-1 rounded-4">Réserver</a>
-                <button  class="btn btn-sm btn-danger rounded-4">Delete</button>
+                <button @click="onDelete(annonce.id)" class="btn btn-sm btn-danger rounded-4">Delete</button>
               </div>
             </div>
           </div>

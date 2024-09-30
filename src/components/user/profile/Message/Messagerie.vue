@@ -227,7 +227,7 @@ const submit = async (e) =>{
             <p class="text-success">Votre système de messagerie</p>
           </div>
         </div>
-        <div class="type_msg">
+        <div class="type_msg" v-if="route.params.id">
           <div class="input_msg_write">
             <input type="text" class="write_msg" v-model="contenu" placeholder="Type a message" />
             <button class="msg_send_btn  btn btn-sm btn-success"  @click.prevent="sendMessage" type="submit">
