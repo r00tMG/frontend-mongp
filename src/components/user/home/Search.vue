@@ -6,6 +6,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
 import planete from '@/assets/images/travel.svg'
+import Loader from "@/components/Loader.vue";
 const annonces = ref([]);
 const searchDepart = ref('');
 const searchArrivee = ref('');
@@ -13,6 +14,8 @@ const searchOrigin = ref('');
 const searchDestination = ref('');
 
 const hasSearched = ref(false);
+const isLoading = ref(false)
+
 const searchAnnonces = async () => {
   if (searchDepart.value || searchArrivee.value || searchOrigin.value || searchDestination.value) {
     const r = await axios.get('/annonce_on_home', {
@@ -53,6 +56,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
   <main>
     <div class="card p-0 rounded-0 border-0 bg-success">
       <img :src="planete" class="card-img img-fluid" alt="...">
@@ -110,7 +114,7 @@ onMounted(async () => {
                     <div class="modal-dialog modal-xl">
                       <div class="modal-content">
                         <div class="modal-body">
-
+                          <Loader  :isLoading="isLoading"/>
                           <div v-if="hasSearched && filteredAnnonces.length > 0" class="album py-5 bg-body-tertiary">
                             <div class="container">
                               <div class="container w-75  d-flex m-4 p-5 gap-5">

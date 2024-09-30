@@ -2,7 +2,10 @@
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Swal from "sweetalert2";
+import Loader from "@/components/Loader.vue";
 const users = ref([])
+const isLoading = ref(false)
+
   onMounted(async () => {
     const r = await axios.get('/users',{
       headers:{
@@ -35,6 +38,8 @@ const users = ref([])
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
+
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
       <h4 class="text-success">Liste des users</h4>

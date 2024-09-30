@@ -1,10 +1,12 @@
 <script >
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
+import Loader from "@/components/Loader.vue";
 
 
 export default {
   name: 'TableProfile',
+  components: {Loader},
   setup(){
     let token = localStorage.getItem('token')
     const data = JSON.parse(localStorage.getItem('data'))
@@ -14,6 +16,8 @@ export default {
     //console.log(user.id)
     //console.log(roles)
     const profile = ref({ profiles: [] })
+const isLoading = ref(false)
+
     const fetchReservation = async ()=>{
       const r = await axios.get('/demandes', {
         headers: {
@@ -57,6 +61,7 @@ export default {
       roles,
       reservations,
       annonces,
+      isLoading
     }
   }
 }
@@ -64,6 +69,8 @@ export default {
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
+
   <div class="row" v-if="profile.profiles" v-for="profile in profile.profiles">
     <div class="col-12 grid-margin">
       <div class="card mb-4 border border-success">
@@ -219,7 +226,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="border border-success" v-else-if="roles[0].name === 'Client'">
+        <div class="border border-success" v-else-if="roles[0].name === 'Client' || roles[0].name === 'admin'">
           <h4 class="text-light">Mes réservations</h4>
           <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="reservation in reservations" :key="reservation.id">
             <div class="row">

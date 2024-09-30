@@ -6,6 +6,7 @@ import axios from "@/axios.js";
 import {useRoute} from "vue-router";
 import SectionHomeContent from "@/components/user/home/SectionHomeContent.vue";
 import Swal from "sweetalert2";
+import Loader from "@/components/Loader.vue";
 const annonce = ref([])
 const errors = ref({})
 const route = useRoute()
@@ -14,6 +15,7 @@ const user_id = ref('')
 const kilos_demandes = ref('')
 const panier = ref('')
 const data = JSON.parse(localStorage.getItem('data'))
+const isLoading = ref(false);
 
 const onDemander = async () => {
   try {
@@ -140,8 +142,8 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
   <div class="container-fluid px-0">
-
     <div class="album d-flex">
       <div class="w-75 rounded-circle-end-3">
         <div class="container p-5 w-100 m-auto shadow">

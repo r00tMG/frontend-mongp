@@ -1,11 +1,7 @@
 <script setup>
 import FooterHome from "@/components/user/home/FooterHome.vue";
-import {computed, onMounted, ref} from "vue";
-import axios from "@/axios.js";
 import '@vuepic/vue-datepicker/dist/main.css'
-import Multiselect from '@vueform/multiselect';
 import '@vueform/multiselect/themes/default.css';
-import monde from '@/assets/images/monde.svg'
 import publish from '@/assets/images/publish.svg'
 import payment from '@/assets/images/payment.svg'
 import message from '@/assets/images/message.svg'

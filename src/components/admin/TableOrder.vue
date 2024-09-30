@@ -1,7 +1,10 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import axios from "@/axios.js";
+import Loader from "@/components/Loader.vue";
 const orders = ref([])
+const isLoading = ref(false)
+
 onMounted(async ()=>{
   const r = await axios.get('index/orders',{
     headers:{
@@ -14,6 +17,8 @@ onMounted(async ()=>{
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
+
   <div class="mt-5">
     <div class="d-flex justify-content-between my-2">
       <h4 class="text-success">Les réservations</h4>

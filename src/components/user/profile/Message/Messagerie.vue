@@ -2,9 +2,11 @@
 import { onMounted, ref, computed } from "vue";
 import axios from '@/axios.js'
 import { useRoute } from "vue-router";
-
+import Loader from "@/components/Loader.vue";
+import logo from '@/assets/images/logo.png'
 export default {
   name: 'Messagerie',
+  components: {Loader},
   setup() {
     const users = ref([]);
     const searchQuery = ref('');
@@ -14,6 +16,7 @@ export default {
     const discussion = ref([])
     const userId = ref(JSON.parse(localStorage.getItem('data')).user.id)
     const counts = ref('')
+    const isLoading = ref(false);
 
     const filteredUsers = computed(() => {
       if (!searchQuery.value) return users.value;
@@ -148,7 +151,9 @@ const submit = async (e) =>{
       userId,
       submit,
       counts,
-      route
+      route,
+      isLoading,
+      logo
     };
   }
 }
@@ -156,7 +161,8 @@ const submit = async (e) =>{
 </script>
 
 <template>
-  <div class="messaging border border-success rounded-1">
+  <Loader  :isLoading="isLoading"/>
+  <div  class="messaging border border-success rounded-1">
     <div class="inbox_msg">
       <div class="inbox_people border border-success">
         <div class="headind_srch">
@@ -193,6 +199,7 @@ const submit = async (e) =>{
         </div>
       </div>
       <div class="mesgs">
+        <Loader  :isLoading="isLoading"/>
         <div class="msg_history" v-if="route.params.id">
           <div v-if="messages" v-for="message in messages" :key="message.id">
             <div class="incoming_msg" v-if="message.recepteur.id === userId" >
@@ -214,7 +221,12 @@ const submit = async (e) =>{
            </div>
           </div>
         </div>
-        <div class="msg_history" v-else>salut</div>
+        <div class="msg_history" v-else>
+          <div class="container m-auto text-center mt-5">
+            <img :src="logo" class="img-fluid logo " alt="logo" width="100px" height="100px">
+            <p class="text-success">Votre système de messagerie</p>
+          </div>
+        </div>
         <div class="type_msg">
           <div class="input_msg_write">
             <input type="text" class="write_msg" v-model="contenu" placeholder="Type a message" />
@@ -254,6 +266,10 @@ img{ max-width:100%;}
   float: left;
   overflow: hidden;
   width: 40%; border-right:1px solid #c4c4c4;
+}
+.logo{
+  width: 100px !important;
+  height: 100px !important;
 }
 img {
   max-width: 100%;

@@ -132,7 +132,7 @@ const router = createRouter({
     {
       path: '/profile',
       component: Profile,
-      //meta: { requiresAuth: true },
+      meta: { requiresAuth: true },
       children: [
         {
           path: '',

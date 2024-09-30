@@ -5,9 +5,10 @@ import { useRoute, useRouter } from 'vue-router'
 import axios from "@/axios.js";
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
+import Loader from "@/components/Loader.vue";
 export default {
   name: 'EditProfile',
-  components: { Navbar },
+  components: {Loader, Navbar },
   setup(){
     const address = ref('')
     const hobbies = ref('')
@@ -23,6 +24,8 @@ export default {
 
     const route = useRoute()
     //console.log(route.params.id)
+const isLoading = ref(false)
+
     onMounted(async () => {
       const r = await axios.get(`/profiles/${route.params.id}`,{
         headers: {
@@ -97,14 +100,15 @@ export default {
       user_id,
       onSubmit,
       errors,
-      logo
+      logo,
+      isLoading
     }
   }
 }
 </script>
 
 <template>
-<!--  <Navbar />-->
+  <Loader  :isLoading="isLoading"/>
   <div class="container  rounded-4 shadow border border-success ">
     <div class="p-3 w-100">
       <p class="tulisan_login">Modifier votre profile Utilisateur</p>

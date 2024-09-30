@@ -4,13 +4,14 @@ import { useRouter } from 'vue-router';
 import axios from "@/axios.js";
 import logo from '@/assets/images/logo.png';
 import Swal from "sweetalert2";
+import Loader from "@/components/Loader.vue";
 const name = ref('');
 const permissions = ref([]);
 const allPermissions = ref([]);
 const errors = ref({});
 const router = useRouter();
 const token = localStorage.getItem('token');
-
+const isLoading=ref(false)
 const fetchPermissions = async () => {
   try {
     const response = await axios.get('/permissions', {
@@ -64,6 +65,7 @@ fetchPermissions();
 </script>
 
 <template>
+  <Loader  :isLoading="isLoading"/>
   <div class="container border border-success mt-2 rounded-4 shadow p-3">
     <p class="tulisan_login">Créer un role</p>
     <img :src="logo" alt="Logo">
