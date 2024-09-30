@@ -25,7 +25,7 @@ export default {
 
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #3498db;
+  border-left-color: #337447;
   border-radius: 50%;
   width: 40px;
   height: 40px;

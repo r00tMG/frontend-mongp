@@ -24,7 +24,7 @@ export default {
 
     const route = useRoute()
     //console.log(route.params.id)
-const isLoading = ref(false)
+    const isLoading = ref(false)
 
     onMounted(async () => {
       const r = await axios.get(`/profiles/${route.params.id}`,{
@@ -109,10 +109,9 @@ const isLoading = ref(false)
 
 <template>
   <Loader  :isLoading="isLoading"/>
-  <div class="container  rounded-4 shadow border border-success ">
-    <div class="p-3 w-100">
+  <div class="container m-auto  rounded-4 shadow border border-success ">
+    <div class="p-5 w-100">
       <p class="tulisan_login">Modifier votre profile Utilisateur</p>
-
       <img :src="logo" alt="Logo">
       <form @submit.prevent="onSubmit">
         <div hidden="true" class="form-group mb-3">

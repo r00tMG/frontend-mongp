@@ -1,5 +1,5 @@
 <script >
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import axios from "@/axios.js";
 import Loader from "@/components/Loader.vue";
 
@@ -13,6 +13,7 @@ export default {
     const roles = data.user.role
     const reservations = ref([])
     const annonces = ref([])
+    const searchQuery = ref('')
     //console.log(user.id)
     //console.log(roles)
     const profile = ref({ profiles: [] })
@@ -25,7 +26,7 @@ const isLoading = ref(false)
         }
       })
       reservations.value = await r.data
-      console.log('Mes réservations:', reservations.value)
+      //console.log('Mes réservations:', reservations.value)
     }
     const fetchAnnonce = async ()=>{
       const r = await axios.get('/annonces',{
@@ -35,6 +36,7 @@ const isLoading = ref(false)
         }
       })
       annonces.value = r.data.annonces
+      //console.log(annonces.value)
     }
 
     onMounted(async () => {
@@ -54,14 +56,35 @@ const isLoading = ref(false)
       await fetchAnnonce()
     })
 
-
-
+    const filteredAnnonces = computed(() => {
+      if (!searchQuery.value) return annonces.value;
+      return annonces.value.filter((item) =>{
+          return(
+            item.destination.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+            item.origin.toLowerCase().includes(searchQuery.value.toLowerCase())
+          )
+      }
+      );
+    });
+    const filteredReservations = computed(() => {
+      if (!searchQuery.value) return reservations.value;
+      return reservations.value.filter((item) =>{
+            return(
+                item.annonce.destination.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+                item.annonce.origin.toLowerCase().includes(searchQuery.value.toLowerCase())
+            )
+          }
+      );
+    });
     return{
       profile,
       roles,
       reservations,
       annonces,
-      isLoading
+      isLoading,
+      searchQuery,
+      filteredAnnonces,
+      filteredReservations
     }
   }
 }
@@ -70,7 +93,6 @@ const isLoading = ref(false)
 
 <template>
   <Loader  :isLoading="isLoading"/>
-
   <div class="row" v-if="profile.profiles" v-for="profile in profile.profiles">
     <div class="col-12 grid-margin">
       <div class="card mb-4 border border-success">
@@ -178,8 +200,10 @@ const isLoading = ref(false)
     <div class="col-md-8  middle-wrapper">
       <div class="row bg-success rounded-1">
         <div class="col-md-12  grid-margin" v-if="roles[0].name === 'GP'">
-          <h4 class="text-light">Mes annonces</h4>
-          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="annonce in annonces" :key="annonce.id">
+          <div class="d-flex justify-content-between align-items">
+            <h4 class="text-light" >Mes annonces</h4>
+          </div>
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-if="filteredAnnonces.length !==0" v-for="annonce in filteredAnnonces" :key="annonce.id">
             <div class="card-header bg-white border-0">
               <div class="d-flex justify-content-between align-items">
                 <div>
@@ -225,10 +249,15 @@ const isLoading = ref(false)
               </div>
             </div>
           </div>
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-else-if="filteredAnnonces.length ===0">
+            <div class="container m-auto text-center">
+              Aucune annonce n'a été trouvé
+            </div>
+          </div>
         </div>
-        <div class="border border-success" v-else-if="roles[0].name === 'Client' || roles[0].name === 'admin'">
+        <div class="border border-success">
           <h4 class="text-light">Mes réservations</h4>
-          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-for="reservation in reservations" :key="reservation.id">
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-if="filteredReservations.length !==0" v-for="reservation in filteredReservations" :key="reservation.id">
             <div class="row">
               <div class="col-md-10">
                 <div class="card-body border-success rounded-5 shadow border">
@@ -262,12 +291,37 @@ const isLoading = ref(false)
               </div>
             </div>
           </div>
+          <div class="bg-white mb-3 p-3 shadow m-auto border-success border rounded" v-else-if="filteredReservations.length === 0" >
+            <div class="container m-auto text-center">
+              Aucune réservation n'a été trouvé
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!-- middle wrapper end -->
     <!-- right wrapper start -->
+
     <div class="d-none col-md-2 d-xl-block ">
+      <div class="row mb-3 " >
+        <div class="col-md-12  grid-margin">
+          <div class="card rounded border border-success">
+            <div class="card-body">
+
+              <div class="srch_bar">
+                <div class="stylish-input-group">
+                  <input type="text" class="form-control search-bar" v-model="searchQuery" placeholder="Search">
+                  <!--                <button class="btn btn-sm btn-success" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    </svg>
+                                  </button>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row mb-3 " v-if="roles[0].name === 'GP'">
         <div class="col-md-12  grid-margin">
           <div class="card rounded border border-success">
@@ -323,21 +377,6 @@ body {
   background-color: #e8f5ff;
   font-family: Arial;
   overflow: hidden;
-}
-
-/* NavbarTop */
-.navbar-top {
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0px 4px 8px 0px grey;
-  height: 70px;
-}
-
-.title {
-  font-family: 'Dancing Script', cursive;
-  padding-top: 15px;
-  position: absolute;
-  left: 45%;
 }
 
 .navbar-top ul {
