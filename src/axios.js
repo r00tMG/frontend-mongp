@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'https://backend-mongp.mayaapps.site/api',
+  //baseURL: 'https://backend-mongp.mayaapps.site/api',
+  baseURL: 'http://localhost:8000/api'
+
   //timeout: 10000
 });
 instance.interceptors.request.use(config => {

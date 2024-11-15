@@ -18,11 +18,13 @@ export default {
 </script>
 
 <template>
-  <Navbar />
+  <div class="container-fluid p-0 m-0">
+    <Navbar />
     <div>
       <router-view>
       </router-view>
     </div>
+  </div>
 </template>
 
 <style scoped>

@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import Loader from "@/components/Loader.vue";
+import '@/index.css'
 
 </script>
 

@@ -23,6 +23,7 @@ import DemandeIndex from "@/components/user/profile/DemandeIndex.vue";
 import TableOrder from "@/components/admin/TableOrder.vue";
 import Search from "@/components/user/home/Search.vue";
 import Messagerie from "@/components/user/profile/Message/Messagerie.vue";
+import AnnonceEdit from "@/components/user/profile/AnnonceEdit.vue";
 
 const router = createRouter({
   //import.meta.env.BASE_URL
@@ -99,6 +100,7 @@ const router = createRouter({
           component: Demande,
           meta: { requiresAuth: true }
         },
+
         {
           path: '/payment/:id',
           name: 'payment',
@@ -145,6 +147,13 @@ const router = createRouter({
           name: 'edit.profile',
           component: EditProfile,
           meta: { requiresAuth: true }
+        },
+        {
+          path:'/annonces/:id/edit',
+          name:'edit.annonce',
+          component: AnnonceEdit,
+          meta:{requiresAuth: true}
+
         },
         {
           path: '/annonces/create',
